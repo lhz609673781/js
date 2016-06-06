@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式实例__脏话过滤</title>
+	<style type="text/css">
+		textarea{
+			width: 400px;
+			height:300px;
+		}
+	</style>
+</head>
+<body>
+	<textarea id="first"></textarea><br/>
+	<input type="button" name="filter" value="过滤"  onClick="zang()" /><br/>
+	<textarea id="late"></textarea><br/>
+	<script type="text/javascript">
+		function zang(){
+			var str=document.getElementById("first").value;
+			var reg=/他妈|人妖|你他妈/g;
+			document.getElementById("late").value=str.replace(reg,function(xx){
+				var result='';						//xx代表reg的母体
+				for(var i=0;i<xx.length;i++){      //利用匿名函数回调实现和字数相同的*
+
+					result+="*";
+				}
+				return result;
+			});
+		}
+	</script>>
+
+</body>
+</html>

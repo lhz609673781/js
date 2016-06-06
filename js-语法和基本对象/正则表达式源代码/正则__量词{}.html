@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则__量词{}</title>
+</head>
+<body>
+	<input type="text" name="qq" size=20 id="q_q">
+	<input type="button" name="filter" value="登陆" onClick="filter()">
+		<script type="text/javascript">
+		//量词：规定出现的次数 {}
+		//{3}  出现3次   {4，}出现4次以上
+		function filter(){
+			var str=document.getElementById("q_q").value;
+			var reg=/^[1-9]\d{4,10}$/g;  
+			if(reg.test(str)){
+				alert("是QQ号");
+			}else{
+				alert("不是QQ号");
+			}
+		}
+		</script>
+
+</body>
+</html>

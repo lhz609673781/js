@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>取DOM操作文本值_和设值</title>
+</head>
+<body>
+	<input type="text" name="abcde">
+	<div>
+		<p>凌红竹你好</p>
+	</div>
+	<script type="text/javascript">
+		var idiv=document.getElementsByTagName("div")[0];
+		alert(idiv.innerText);  //凌红竹你好
+		alert(idiv.innerHTML);  //<p>凌红竹你好</p>
+		idiv.innerText="<p>who am i</p>";
+		alert(idiv.innerText);//将<div>里的文本改了
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	
+</head>
+<body>
+	<script type="text/javascript">
+		var classes01=[
+		{
+			name:'janny',
+			age:18,
+			gender:'男'
+		},{
+			name:'mary',
+			age:20,
+			gender:'女'
+		},{
+			name:'smith',
+			age:19,
+			gender:'男'
+		}];
+		var classes02=[
+		{
+			name:'jane',
+			age:21,
+			gender:'女'
+		},{
+			name:'bob',
+			age:18,
+			gender:'男'
+		},{
+			name:'jack',
+			age:20,
+			gender:'男'
+		}];
+		function getAverage(arr){
+			var sum=0;
+			var length=arr.length;
+			var avg=0;
+			for(var i=0;i<arr.length;i++){
+				var stu=arr[i];  //为数组下的age求和定义,从数组中取出的每一个元素是一个对象；
+				sum=sum+stu.age;  //从每个对象中取出年龄   变量名.属性名
+			}
+			avg=sum/length;
+			return avg;
+		};
+		alert("一班的学生平均年龄："+getAverage(classes01));
+		alert("二班的学生平均年龄："+getAverage(classes02));
+
+
+		//求出每个班级的男女比例
+		function getRadio(arr){
+			var male=0,female=0;
+			var length=arr.length;
+			var r;
+			for(var j=0;j<length;j++){
+				var s=arr[j];
+				if(s.gender=='男'){
+					male++;
+				}else{
+					female++;
+				}
+			}
+			r=female/male;
+			return r;
+		}
+		document.write("一班的男女比例："+getRadio(classes01)+"<br/>");
+		document.write("二班的男女比例："+getRadio(classes02)+"<br/>")
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装-寻找标签节点</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//封装--寻找上一个元素节点
+		function preS(n){
+			var x=n.previousSibling;
+			while(x && x.nodeType!=1){
+				x=x.previousSibling
+			}
+			return x;
+		}
+
+
+	//寻找下一个元素节点
+	function nextS(w){
+		var k=w.nextSibling;
+		while(k && k.nodeType!=1){
+			k=k.nextSibling
+		}
+		return k;
+	}
+	//子节点的元素节点
+	function child(c){
+    var a=c.childNodes[0];
+    while(a && a.nodeType!=1){
+      a=a.nextSibling;
+    }
+    return a;
+  }
+	</script>
+</body>
+</html>

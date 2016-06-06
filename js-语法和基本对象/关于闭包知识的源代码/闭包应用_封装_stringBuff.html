@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>对输出的数组_值进行封装</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var stringBuff=(function(){
+			var arr=[];
+			return {
+				append:function(val){
+					return arr[arr.length]=val;
+				},
+				value:function(){
+					return arr.join(' ');
+				}
+			};
+
+		})();
+		stringBuff.append('龙');
+		stringBuff.append('的');
+		stringBuff.append('传');
+		stringBuff.append('人');
+		document.write(stringBuff.value());
+	</script>
+</body>
+</html>

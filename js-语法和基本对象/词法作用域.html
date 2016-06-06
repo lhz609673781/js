@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>词法作用域</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/*	function f1(){
+			var a=1;
+			return f2();
+		}
+		function f2(){
+			return a;
+		}
+		//f1();
+		document.write(f2());  //ReferenceError: a is not defined
+	*/
+
+
+
+		//解决f2无法访问a的问题
+		function f1(){
+			var a=1;
+			return function(){
+				return a;
+			};
+		}
+		
+		document.write(f1()());
+	</script>
+</body>
+</html>

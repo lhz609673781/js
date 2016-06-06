@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>内部私有函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function show(){
+			function son(){            //子函数用来包装一些特殊算法
+				document.write("hello");
+			}
+			son();        //调用子函数
+		}
+
+		//通过父函数来调用子函数：
+		show();
+		document.write("<br/>");
+
+
+		//计算两个数之间的运算
+		function jisuan(a,b,op){      //op为算法
+			function add(a,b){
+				return a+b;            //返回ab的和
+			};
+			function sub(a,b){
+				return a-b;				//返回ab的差
+			};
+			function cc(a,b){
+				return a*b;				//返回ab的积
+			}
+			function chu(a,b){
+				return a/b;				//返回ab的商
+			}
+			if(op=='+'){              //输入运算符，得出运算结果
+				return add(a,b);
+			}else if(op=='-'){
+				return sub(a,b);
+			}else if(op=='*'){
+				return cc(a,b);
+			}
+			else if(op=="/"){
+				return chu(a,b);
+			}
+
+		}
+		document.write(jisuan(2,2,'/'))
+	</script>
+</body>
+</html>

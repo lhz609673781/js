@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>闭包的应用bug_保存现场</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//第一种方法：内部函数
+		function f(){
+			var a=[];
+			function carry(l){
+				return function(){   //闭包
+					return l*2;
+				}();               //执行这个函数会进行自调用
+			}
+			for (var i=0;i<5;i++){    
+				a[i]=carry(i);       //给数组a赋值
+			}
+			return a;
+		}
+		var result=f();
+		document.write(result[0]+"<br/>"+result[1]+"<br/>"+result[2]+"<br/>"+result[3]+"<br/>"+result[4]+"<br/>"+result[5]+"<br/>")
+		//第二种方法：内部函数,闭包
+		function f(){
+			var a=[];
+			for(var i=1;i<5;i++){
+				a[i]=function(l){
+					return function(){      //用匿名函数直接返回
+						return l*2;			
+					}
+				}(i);
+			}
+			return a;
+		}
+		var arre=f();
+		document.write(arre[0]+"<br/>"+arre[1]+"<br/>"+arre[2]+"<br/>"+aeer[3]+"<br/>"+aeer[4]+"<br/>"+arre[5]+"<br/>")
+
+
+		//第三种方法：外部函数
+		function inner(i){
+			return function(){
+				return i*2;
+			}						//与方案一类似，内部函数更易于管理
+		}();
+		var a=[];
+		function ff(){
+			for(var j=0;j<5;j++){
+				a[j]=inner(j);
+			}
+			return a;
+		}
+		var arre1=f();
+		document.write(arre1[0]+"<br/>"+arre1[1]+"<br/>"+arre1[2]+"<br/>"+aeer1[3]+"<br/>"+aeer1[4]+"<br/>"+arre1[5]+"<br/>")
+	</script>
+</body>
+</html>

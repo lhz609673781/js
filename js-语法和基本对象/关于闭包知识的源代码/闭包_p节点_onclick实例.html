@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>闭包_p节点_onclick实例</title>
+</head>
+<body>
+	<p>第一行</p>
+	<p>第二行</p>
+	<p>第三行</p>
+
+
+
+	<script type="text/javascript">
+
+		//错误的示范
+		function addhandler(nodes){
+			for(var i=0;i<nodes.length;i++){
+				var node=nodes[i];					//当var重新定义node是会重新对node赋值，而闭包只作用于最后一个数值
+				node.onclick=function(){
+					alert(i+1);
+				};
+			}
+		}
+		var nodes=document.getElementsByTagName('p');
+		addhandler(nodes);
+
+		//第一种方案：
+		function add(nodes){         
+			function carry(j){				//定义了一个输出函数
+				return function(){			//闭包
+					alert(j+1);	
+					//若在此段匿名函数后面加（）会直接弹出框，而不受onclick控制			
+				};
+			};
+			for(var i=0;i<nodes.length;i++){	//将p标签节点逐一输出			
+				node=nodes[i];
+				node.onclick=carry(i);			//onclick是一个事件模型，当用户点击的时候会自动执行上面的代码
+			}
+
+		}
+		var code=document.getElementsByTagName('p');		//返回带有制定标签名对象的集合
+		add(code);
+
+		//第二种方法：
+		function add1(nodes){
+			for(var k=0;k<nodes.length;k++){
+				node=nodes[k];
+				node.onclick=function(i){
+					return function(){
+							alert(i+1);
+						}
+				}(k);
+			}
+		}
+		var pp=document.getElementsByTagName('p');
+		add1(pp)
+	</script>
+</body>
+</html>

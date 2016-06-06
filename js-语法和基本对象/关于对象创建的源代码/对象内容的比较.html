@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>对象内容的比较</title>
+</head>
+<body>
+	<script type="text/javascript">
+		Object.prototype.equals=function(obj){
+			var result=false;
+			if(!obj){   //没有这个对象
+				return result;
+			};
+			for(var key in obj){
+				if( !obj[key] || !this[key] || obj[key]!=this[key]){    //任何条件出错都会返回false
+					return result;
+				};
+			};
+			for(var key in this){
+				if( !obj[key] || !this[key] || obj[key]!=this[key]){
+					return result;
+				};
+			}
+			result=true
+			return result;
+		}
+		var a={name:'lhz',age:20};
+		var d={name:'lhz',age:20};
+		var b={name:'lhz',age:20,sex:'female'};
+		var c;
+		document.write(a.equals(b)+'<br/>');  //false
+		document.write(a.equals(d)+'<br/>');  //ture
+		document.write(a.equals(c));			//false
+  
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用静态和原型定义一个圆的类</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function circle(r){
+			this.r=r;			//只需定义一个半径r的属性
+		}
+		 circle.PI=3.14; //通过静态成员直接定义pai；
+		 circle.prototype={
+		 	//定义圆的功能
+		 	length:function(){
+		 		return 2*this.r*circle.PI;
+		 	},
+		 	area:function(){
+		 		return this.r*this.r*circle.PI;
+		 	}
+		 }
+		 var c=new circle(5);
+		 document.write("周长为：55"+c.length()+" <br/>   "+"面积为："+c.area());
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>匿名函数回调</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function show( arr){
+		for( var i=0;i<arr.length;i++){
+				document.write(   arr[i]+"<br />" );	
+		}
+	}
+	
+	function show2( arr){
+		document.write("<ul>");
+		for( var i=0;i<arr.length;i++){
+				document.write( "<li>"+   arr[i] +"</li>");
+		}	
+		document.write("</ul>");
+	}
+
+
+		 function jisuan(){
+		 	var arr=new Array();
+		 	for(var i=0;i<arguments.length;i++){
+		 		arr[i]=arguments[i]*3;
+		 	}
+		 	//return arr;
+		 	//再调用   show(   数组);
+			//判断arguments最后一个参数是否为  function
+		 	if(  (typeof arguments[arguments.length-1] ) =='function'){
+		 		arguments[arguments.length-1](arr);
+		 	};//  arguemnts[arguments.length-] 指的是代码，为激活代码   要加  ()使show代码运行;
+		 }
+		 jisuan(1,2,3,4,5,6 ,   //show){
+		 	for(var i=0;i<arr.length-1;i++){
+		 		document.write(arr[i]+"<hr/>")
+		 	}
+		 })
+
+
+
+
+		 	//直接使用匿名函数
+		 jisuan(2,3,4,5,6 ,   function(arr){
+		 	for(var i=0;i<arr.length-1;i++){
+		 		document.write(arr[i]+"<hr/>")
+		 	}
+		 })
+	</script>
+</body>
+</html>

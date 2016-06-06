@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>基于原型的继承</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//创建父类
+		function Animal(){}
+		Animal.prototype={
+			group:function(name){
+				return name;
+			},
+			eat:function(food){
+				return food;
+			},
+			sleep:'睡觉'
+			// toString:function(){
+			// 	return this.group+"<br/>"+this.eat+"<br/>"+this.sleep+"<br/>";
+			// }
+		}
+		//创建子类
+		function bird(){};
+		bird.prototype=new Animal();
+		//以上是继承的重要一步
+		bird.prototype.flay="飞行"
+		var b1=new bird();//构造鸟的一个对象函数
+		document.write(b1.group('麻雀')+"<br/>"+b1.eat("谷粒")+"<br/>"+b1.sleep+b1.flay+"<hr/>")
+
+		//此时b1.constructor和b2.constructor是一个Object,而不是bird的类
+		document.write(b1.constructor+"<br/>")	//function Object() { [native code] }
+		var b2=new b1.constructor();
+		document.write( (b2 instanceof bird) +"<br/>" )  //false
+
+
+		//继承的时候修改constructor的值非常重要！！！！
+		//便于后面的对象类型的判断
+		bird.prototype.constructor=bird;
+		document.write(b1.constructor+"<br/>");   //function bird(){}
+		var newb2=new b1.constructor();
+		document.write((newb2 instanceof bird) +"<br/>")//true
+	</script>
+</body>
+</html>

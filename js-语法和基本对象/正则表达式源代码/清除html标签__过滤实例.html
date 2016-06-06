@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>清除html标签__过滤实例</title>
+</head>
+<body>
+	<textarea id="first"></textarea><br/>
+	<input type="button" name="filter" value="过滤"  onClick="filter()" /><br/>
+	<textarea id="late"></textarea><br/>
+	<script type="text/javascript">
+		function filter(){    //此函数由onclick点击调用
+			var str=document.getElementById("first").value;
+			var reg=/<[^>]+>/g; //正则：[^>]除>号的所有标签
+			document.getElementById('late').value=str.replace(reg,"")
+		}
+	</script>
+</body>
+</html>

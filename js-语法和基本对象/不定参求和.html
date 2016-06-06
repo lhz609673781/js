@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//不定参：在函数中有一个隐含的变量 arguments  =>数组，它里面存有传过来的所有的实参的值。
+		function nom(){
+			var sum=0;
+			var length=arguments.length;
+			for(var a=0;a<length;a++){
+				sum=sum+arguments[a];
+			}
+			return sum;
+		}
+		document.write(nom(1,2,3));
+	</script>
+</body>
+</html>

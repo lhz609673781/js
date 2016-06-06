@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>原型操作prototype</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		Person.prototype.play=function(){
+			document.write("enjoy");
+		};//第一种属性扩展方式
+		var a=new Person();
+		a.play();
+		document.write("<hr/>");
+
+		//第一种扩展方式
+		Person.prototype.xxx='iiii';//扩展属性一定要注意：会使这个类所有的对象都会有相同的值
+
+		//第二种扩展方式
+		Person.prototype={
+		//此举会将之前的Person.prototype.play覆盖掉
+			sayBye:function(name){
+				document.write(this.name+"say Bye to"+name+"<br/>");
+			},
+			sayhello:function(name){
+				document.write(this.name+"say hello to"+name+"<br/>");
+
+			},
+			eatfood:function(food){
+				document.write(this.name+"吃"+food);
+			}
+		};
+		var p=new Person("凌红竹",20);
+		p.eatfood('肉');
+		document.write("<br/>")
+		p.sayhello('杨雪');
+
+		//prototype重写
+		Person.prototype.sayhello=function(name){
+			document.write(this.name+"打招呼"+name+"<br/>")
+		};
+		p.sayhello('杨雪');
+
+
+		//对功能重写、添加了Person的功能、不会覆盖之前的功能
+		Person.prototype.like=function(){
+			document.write("watching TV"+"<br/>");
+		}
+		p.like(); //watching TV
+		p.eatfood("apple");  //凌红竹吃apple 
+
+	</script>
+</body>
+</html>

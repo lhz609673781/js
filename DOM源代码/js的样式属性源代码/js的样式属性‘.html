@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>js的样式属性</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<div id="mydiv" style="width:100px;height:100px;background-color:red;" onclick="divcolor()"></div>
+	<div id="pic" style="background:url(981131.jpg);width:200px;height:200px;background-size:cover;" onclick="bgpic()" ></div>
+	<p>用js改变样式</p>
+	<input type="button" value="一键换肤" onclick="bgpic()">
+	<script type="text/javascript">
+	 function divcolor(){
+	 	var idiv=document.getElementById("mydiv");
+	 	idiv.style.backgroundColor="blue";
+	 }
+	 function bgpic(){
+	 	var pic1=document.getElementById("pic");
+	 	pic1.style.background="url(1245109.jpg)";
+	 	document.getElementsByTagName("p")[0].style.color="pink";
+	 }
+	</script>
+</body>
+</html>

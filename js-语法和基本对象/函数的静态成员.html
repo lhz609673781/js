@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>静态成员</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//可直接扩展一个方法，这个方法即是这个函数的静态成员
+		Object.saybye=function(){
+			alert("bye"+"<br/>")
+		}
+		Object.prototype.sayhello=function(){
+			alert( "hello")
+		}
+		Object.sayhello();
+		var obj=new Object();
+		// var abj=Object();
+		// abj.saybye();
+		obj.saybye();      // obj.saybye is not a function
+		obj.sayhello();
+	</script>
+</body>
+</html>

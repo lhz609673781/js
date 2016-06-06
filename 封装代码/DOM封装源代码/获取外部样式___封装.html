@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>获取节点外部样式___封装</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function getStyle(obj,attr){
+			if(obj,currentStyle){
+				return obj.currentStyle("attr");//此方法只兼容IE
+			}else{
+				return window.getComputerStyle(obj,false)["attr"];
+				//此方法可兼容ff,谷歌等浏览器
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM查找访问节点</title>
+	<style type="text/css">
+		img{
+			width:200px;
+			height:200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">
+		<img src="fruit1.jpg" alt="水果1" id="fruit1" />
+		<img src="fruit2.jpg" alt="水果2" id="fruit2" />
+		<h1 id="like">选择你喜欢的水果：</h1>
+		<form id="form1">
+			<input name="enjoy" type="checkbox" value="apple" />苹果
+			<input name="enjoy" type="checkbox" value="banana" />香蕉
+			<input name="enjoy" type="checkbox" value="grape" />葡萄
+			<input name="enjoy" type="checkbox" value="pear" />梨
+			<input name="enjoy" type="checkbox" value="watermelon" />西瓜
+		</form>
+		<form id="form2">
+			<input name="btn" type="button" value="显示图片1路径" onclick="show()" /><br />
+			<input name="btn" type="button" value="查看喜欢的水果" onclick="look()" /><br />
+			<input name="btn" type="button" value="改变图片2" onclick="change()" /><br />
+			<input name="btn" type="button" value="点击创建图片" onclick="creatImg()" /><br />
+			<input name="btn" type="button" value="全选" onclick="allOk()" /><br />
+			<input name="btn" type="button" value="全不选" onclick="noOk()" /><br />
+			<input name="btn" type="button" value="反选" onclick="fanOK()" /><br />
+		</form>
+		
+		
+	</div>
+
+	<script type="text/javascript">
+	//显示图片1路径
+		function show(){
+			var f1=document.getElementById("fruit1");
+			alert(f1.getAttribute("src"));     //相对路径
+			alert(f1.src);						//绝对路径
+		}
+
+		//查看喜欢的水果
+		function look(){
+			var inputcheck=document.getElementsByName("enjoy");
+			var like="";
+			for(var i=0;i<inputcheck.length;i++){
+				if(inputcheck[i].checked==true){
+					like=like+inputcheck[i].value+",";
+				}
+			}
+			alert(like);
+		}
+		
+
+		//改变图片2
+		function change(){
+			var change_pic=document.getElementById("fruit2");
+			change_pic.getAttribute("src","fruit4.jpg");
+
+		}
+
+		//点击创建图片
+		function creatImg(){
+			var img=document.createElement("img");
+			img.setAttribute("src","fruit3.jpg");
+			img.setAttribute("alt","水果3")
+			//document.body.appendChild(img);
+			//document.getElementById("div1").insertBefore(img,document.getElementById("fruit2"))
+			document.getElementById("div1").insertBefore(img,document.getElementById("fruit1"));
+		}
+
+		//全选
+		function allOk(){
+			var all=document.getElementsByName("enjoy");
+			for(var i=0;i<all.length;i++){
+				if(all[i].checked==false){
+					all[i].checked==true;
+				}
+			}
+			//return all[i]==true;
+		}
+
+		//全不选
+		function noOk(){
+			var noo=document.getElementsByName("enjoy");
+			for(var j=0;j<noo.length;j++){
+				
+			}
+		}
+
+		//单选
+		function fanOK(){
+			var fan=document.getElementsByName("enjoy");
+			for(var k=0;k<fan.length;k++){
+				
+			}
+		}
+	</script>
+</body>
+</html>

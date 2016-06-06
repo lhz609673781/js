@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则——清除空格</title>
+	<style type="text/css">
+		#first,#late{
+			width:300px;
+			height: 300px;
+		}
+	</style>
+</head>
+<body>
+	<textarea id="first"></textarea><br/>
+	<input type="button" name="filter" value="过滤"  onClick="filter()" /><br/>
+	<textarea id="late"></textarea><br/>
+	<script type="text/javascript">
+		function filter(){
+			var str=document.getElementById("first").value;
+			var reg=/^(\s)+|(\s)$/g;  //以空格开头或以空格结尾的正则
+			document.getElementById("late").value=str.replace(reg,"");
+		}
+	</script>
+</body>
+</html>

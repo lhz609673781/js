@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>构造函数 && constructor</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+	//构造函数：初始化对象成员的属性值的函数
+		function Person(name,age){
+
+			//在赋值之前当前对象this的值为空值，复制后为name，age的实参值
+			this.name=name;
+			this.age=age;
+		}
+
+		var zs=new Person('凌红竹',20);    //此为构造函数，赋值功能
+		document.write(zs.name+"   "+zs.age+"<br/>")
+		var zz=new Person('lhz',20);
+		document.write(zz.name+"   "+zz.age+"<br/>");
+		var zz1=new zz.constructor("lllaaa", 24); 
+		//利用constructor判断一个对象的来源，保存了当前构造对象的源代码
+		//可根据zz.constroctor返回的源代码创造另一个对象
+		document.write(zz1.name+"  "+zz1.age+"<br/>");
+		document.write(zz1.constructor+"<br/>");
+
+
+		//利用constructor来查看某个对象是否为一个特定的类型
+		document.write( ( zz.constructor ==Person)+"<br/>" );
+						//在判定时一定要加括号！！！！
+		document.write( (zz1.constructor==Object)+"<br/>");
+	</script>
+</body>
+</html>

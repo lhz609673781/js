@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>匿名函数做返回值用</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function a(){
+			document.write("hello<br/>");
+			return function(){
+				document.write("who am i <br/>");     //返回值，再次调用则输出
+			}
+		}
+		// var r=a();
+		// r();
+		//a()();//先输入hello，再输入返回值
+	</script>
+</body>
+</html>

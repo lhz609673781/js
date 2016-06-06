@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则_重复子项</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//重复子项 /1 第一个子项
+		//匹配子项（）
+		var str='abca';
+		var reg=/(a)(b)(c)\1/;
+		document.write(reg.test(str)+"<hr/>");
+
+
+		//寻找最出现次数最多的字母，且计算出字数
+		var str="ggsrghfhrifngjfngkuhuiag";
+		var arr=str.split(""); //将字符串转为数组
+		str=arr.sort().join("");  //排序后在转为字符串
+		console.log(str);
+		var value=0;
+		var num=0;
+		var reg=/(\w)\1+/g; //匹配子项一定要打上（）
+		str.replace(reg,function($0,$1){
+			if(num<$0.length){    //若num小于当前母体的长度则进入if循环
+				num=$0.length;
+				value=$1;
+			}
+			//return num+value;
+		});
+		alert(num+"   "+value);
+</body>
+</html>

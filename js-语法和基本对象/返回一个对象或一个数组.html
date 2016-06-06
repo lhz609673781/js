@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>返回一个对象或一个数组</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function add(vala,valb){
+			var sum=vala+valb;
+			return {result:sum,a:vala,b:valb}   // 将要输出的值作为一个对象返回
+			//{a:xx,    b:xx,    result:xx}
+		}
+		var r=add(1,2);
+		document.write(r.a+"+"+r.b+"="+r.result+"<br/>");//将变量r下add函数的返回值用+连接起来
+
+
+
+		//输入一个不定数组，对数组求和，按要求输出
+
+		function add2(){
+			var sum=0;             //定义和的函数
+			var arr=new Array();    //定义一个数组，在输入一串数组后，再转存至arr
+
+			for(var k=0;k<arguments.length;k++){
+				sum+=arguments[k];            //对输入的数组求和
+				arr[k]=arguments[k];          //将数组转存至arr
+			}
+			var str=arr.join("+");       //将数组arr用“+”连接起来
+			return {orign:str,result:sum};
+		}
+
+		var a=add2(1,2,3,4,5,6);
+		//var str=a.orign.join("+");        
+		document.write(a.orign+"="+a.result);
+
+	</script>
+</body>
+</html>

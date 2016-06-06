@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>利用匿名函数重写函数自身</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function a(){
+			document.write("hello<br/>");
+			a=function(){
+				document.write("bye<br/>");
+			}
+		}
+		a();      //hello
+		a();		//bye
+
+		function showtree(){
+			var i=2;
+			document.write("what is your name<hr/>");       //第一次函数自调用时显示此结果
+			if(window.ActiveXObject){           //支持activeX控件的浏览器
+				i=1;
+			}
+			if(i==1){
+				showtree=function(){
+					document.write('this is a secret<hr/>');      //若支持则显示此句
+				}
+			}else if(i==2){
+				showtree=function(){
+					document.write('my name is lhz<hr/>');			//若不支持则显示此句
+				}
+			}
+		}
+		(function(){
+			showtree();									//利用匿名函数进行自调用
+		})();
+		showtree();										//根据浏览器运行语句
+
+
+
+		function showtable(){
+			var i=2;
+			if(window.ActiveXObject){
+				i=1;
+			}
+			if(i==1){
+				showtable=function(){
+					var arr=arguments[0];
+					for(var j=0;j<arr.length;j++){
+
+						document.write("<table   border='1'  width='100px'>");
+						document.write("<tr>")
+						document.write("<td>"+arr[j].name+"</td>"+"<td>"+arr[j].age+"</td>");
+						document.write("</tr>")
+						document.write("</table>");
+					}
+				}
+			}else if(i==2){
+				showtable=function(){
+					var arr=arguments[0];       		/* showtable(arr)中，arguments[0]是arr
+															var arr=[{name:"凌红竹",age:20},{name:"祝玲娟",age:18}];
+															arguments[0]是一个二维数组 */
+					for(var k=0;k<arr.length;k++){  
+						document.write("<ul>");
+						document.write("<li>"+arr[k].name+"   "+arr[k].age+"</li>");
+						document.write("</ul>");
+					}
+				}
+			}
+		}
+		(function(){
+			showtable();
+		})();
+		var add=[{name:"凌红竹",age:20},{name:"祝玲娟",age:18}];
+		showtable(add);
+		</script>
+</body>
+</html>

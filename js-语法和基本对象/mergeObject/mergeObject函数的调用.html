@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+      //合并两个对象的值，如果realvalue中没有这个属性，则采用defaultvalue函数
+      //返回一个对象
+     function mergeObject(defaultvalue,realvalue){
+      if(realvalue && typeof realvalue=='object'){
+            for(var key in realvalue){
+                  defaultvalue[key]=realvalue[key]||defaultvalue[key];
+            }
+      }
+      return defaultvalue;
+     }
+	</script>
+</body>
+</html>

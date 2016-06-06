@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>全局对象_保存所有函数引用</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function shoe(){
+			alert('a');
+		};
+		function shoe1(){
+			alert('hello');
+		};
+		function shoe2(){
+			alert('my name ls lhz');
+		};
+		window['shoe']();    //显示window中的全部成员
+		window["shoe1"]();
+		window['shoe2']();
+
+		
+	</script>
+</body>
+</html>

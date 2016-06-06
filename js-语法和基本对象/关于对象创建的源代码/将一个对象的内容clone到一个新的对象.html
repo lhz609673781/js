@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>将一个对象的内容clone到一个新的对象</title>
+</head>
+<body>
+	<script type="text/javascript">
+		Object.prototype.clone=function(){     
+			var newobj={};        //定义一个新的对象
+			for(var key in this){
+				newobj[key]=this[key]; //当前对象赋值给新的对象
+			}
+			return newobj;				//返回新的对象
+		}
+		
+		var a={name:'lhz',age:20};
+		var myobj=a.clone();
+		document.write(myobj.name+"  "+myobj.age);  
+		 //输出时一定按xxx.属性来写，否则只显示Object
+	</script>
+</body>
+</html>

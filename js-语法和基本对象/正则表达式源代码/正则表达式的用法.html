@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式的用法</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//test:判断字符串里面是否能够匹配到正则，能够就返回true,不能就返回false
+		var str="abcd";
+		var reg=/b/;
+		document.write(reg.test(str)+"<br/>");
+
+		var str1="1sdgag55555dsfsggh";
+		var reg1=/\D/;
+		if(reg1.test(str1)){
+			alert("不全是数字");
+		}else{
+			alert("全是数字")
+		}
+
+
+		//search  返回匹配到得位置
+		var str2="156abdgji";
+		var regexp=/abc/;
+		document.write(str2.search(regexp)+"<br/>");
+
+
+
+		//match:返回匹配到的数组
+		//默认情况下：对于正则而言，只要匹配成功就会返回，不会再往下执行
+		var str="545da2s3das42fas5";
+		var reg=/\d/;
+		//默认情况下：对于正则而言，只要匹配成功就会返回，不会再往下执行
+		document.write(str.match(reg)+"<br/>");//5
+		var rege=new RegExp("\\d","g");//全局匹配
+		document.write(str.match(rege)+"<br/>");
+		
+		//量词+：代表\d至少出现一次，最多无限次
+		var regexpp=/\d+/g;
+		document.write(str.match(regexpp));
+
+
+		//replace
+		var str3="aaaaa";
+		var regex=/a/g;
+		str=str.replace(regex,"lhz");
+		document.write(str+"<br/>")
+
+	</script>
+</body>
+</html>

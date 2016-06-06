@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//实参--值传递
+		function increment(p){
+            p=p+1;
+            return p;
+      }
+      var a=1;
+      var x=increment(a);
+      alert(a+"     "+x);
+
+      //参数的引用传递
+      function increments(person){
+            person.age+=1;
+      }
+      var p={name:'tom',age:19};
+      increments(p);
+      document.write(p.name+"     "+p.age);
+
+	</script>
+</body>
+</html>

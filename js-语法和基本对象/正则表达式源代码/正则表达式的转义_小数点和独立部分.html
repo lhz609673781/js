@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式的转义_小数点和独立部分</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//. 为任意字符
+		// \.:字符点
+		var str="ab￥c";
+		var reg=/./;   
+		document.write(reg.test(str)+"<br/>");  //true
+		var reg1=/\./
+		document.write(reg1.test(str)+"<br/>");//false
+
+		// \b:表示独立部分。 表示开始结束和空格
+		//\B：表示独立部分
+		var str="abc  ddsa";
+		var reg2=/\babc\b/;
+		document.write(reg2.test(str)+"<br/>") //true
+	</script>
+</body>
+</html>

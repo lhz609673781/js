@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>匿名函数自调用</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//匿名函数自调用时用括号将代码括起来
+		(function(){
+			document.write('hello<br/>');   //hello
+		})();
+
+		//匿名函数传参
+		(function(){
+			document.write("hello"+arguments[0]+"<br/>")   //hello lhz
+		})('lhz')    //arguments[0]='lhz'
+	</script>
+</body>
+</html>

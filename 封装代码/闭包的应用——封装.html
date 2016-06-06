@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>闭包的应用——封装</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var setAge,getAge  //全局变量
+		(function(){
+			var age=0;
+			//函数内部定义的属性外部无法访问
+			//则这个全局变量可引用一个闭包，在这个函数中访问内部的属性
+			setAge=function(a){
+				age=a;
+			};
+			getAge=function(a){
+				return age;
+			};
+		})();        //将此段匿名函数进行自调用后，setAge和getAge才能得以调用
+		document.write(  getAge() +"<br/>");
+		setAge(30);
+		document.write( getAge()+"<br/>");
+
+		
+
+
+		//封装实例：封装名字和年龄
+
+		var person=(function(){
+			//设置年龄、名字初始值，当年龄和名字不符合要求时。则输出它
+			var name="";   
+			var age=18;
+
+			return {
+				setName:function(n){
+					name=n;
+				},
+				setAge:function(a){//当年龄小于18就会弹出框
+					if(a<18){
+						alert("年龄必须在18岁以上");
+					}else{
+						age=a;
+					}
+				},
+				getName:function(){
+					return name;
+				},
+				getAge:function(){
+					return age;
+				},
+				getString:function(){
+					return "姓名："+name+"年龄："+age
+				}
+			}
+		})();
+		person.setName('凌红竹');
+		person.setAge(-20);
+		document.write(person.getString());
+
+
+
+
+
+		
+	</script>
+</body>
+</html>

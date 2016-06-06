@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function selfNext(arr){
+			var index=0;
+			return function(){
+				return arr[index++]; 
+				//每一次调用只返回一个值，返回后index=index+1;
+			}
+		}
+		var myNext=selfNext([1,2,3,4,5]);
+		while(a=myNext()){  
+		 //将闭包里的函数激活,使用循环自动调用arr所有的值
+			document.write(a+"<br/>");
+		};
+	</script>
+</body>
+</html>

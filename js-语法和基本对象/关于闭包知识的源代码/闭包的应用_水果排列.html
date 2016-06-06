@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>闭包的应用_水果排列</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr=["apple","pear","banana"];
+		var innerArray=[];
+		function add(){
+			function writen(j){
+				return function(){     //已经对闭包进行了自调用，所以在以下    result[]=writen(j),所以无需再加（）；
+					return j;
+				}();    
+			}//不可在此添加（），因为下面results[]=writen(j),会自动调用。
+			for(var i=0;i<arr.length;i++){
+				var item=arr[i];
+				innerArray[i]=writen(item);
+			}
+			return innerArray;
+		}
+		var result=add();
+		document.write(result[0]+"<br/>"+result[1]+"<br/>"+result[2]+"<br/>");
+
+
+		//方案二：匿名函数做闭包
+		var arr=["apple","pear","banana"];
+		var innerArray=[];
+		function add1(){
+			for(var i=0;i<arr.length;i++){
+				 innerArray[i]=(function(i){
+					return function(){	
+							//闭包		
+						return arr[i];			//此函数在r[]（）中得到调用
+					}               
+				})(i);							//对匿名函数进行自调用
+			}
+			return innerArray;
+		}
+		var r=add1();
+		document.write(r[0]()+"<br/>"+r[1]()+"<br/>"+r[2]()+"<br/>");
+
+	</script>
+</body>
+</html>

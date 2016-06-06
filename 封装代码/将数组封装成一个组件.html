@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>将数组封装成一个组件</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var zzarr=(function(){    
+			var arr=[];
+			return {
+				add:function(i){		//使以下函数成为闭包
+				//变量的属性
+					return arr[arr.length]=i;
+				},
+				size:function(){
+					return arr.length;
+				},
+				clear:function(){
+					return arr=[];
+				},
+				get:function(){
+					return arr;
+				}
+			}
+		})();
+		zzarr.add('lhz');
+		zzarr.add('paly');
+		document.write(zzarr.size());
+		document.write(zzarr.get());
+		zzarr.clear();
+		document.write(zzarr.size());
+	</script>
+</body>
+</html>

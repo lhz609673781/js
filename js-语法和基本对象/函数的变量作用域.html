@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>函数的变量作用域</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var a="someone";     
+		function add(){
+			a="nobody";            //a的值已经改变
+			alert(a);
+		}
+		add();					//调用add函数
+
+		document.write(a+"<br/>");   //nobody
+
+		function add2(){
+			var a="who am i";
+			document.write("add2内的a的值:"+a+"<br/>");     // who am i
+		}
+		add2();
+		document.write("函数外的a的值:"+a+"<br/>")      //nobody
+
+		function add3(){
+			var dd="sss";
+			return dd;
+		}
+		add3();
+		document.write(dd);     //ReferenceError: dd is not defined
+
+	</script>
+</body>
+</html>

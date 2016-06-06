@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式匹配子项</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var str="2016-5-20";
+		var reg=/(\d+)-/g;
+		str.replace(reg,function($0){
+			alert($0);
+		})
+
+		var reg=/(\d+)(-)/g;//(\d+)和(-)都是子项
+		str.replace(reg,function($0,$1,$2){
+			document.write($0+"<br/>")      //2016-
+			document.write($1+"<br/>")		//2016
+			document.write($2+"<br/>")		//-
+		})
+
+
+
+		//将2016-5-19变成2016.5.19
+		var str2="2016-5-19"
+		var reg1=/(\d+)(-)/g;
+		str1=str2.replace(reg1,function($0,$1,$2){
+			return $1+".";   
+		});
+		alert(str1);
+	</script>
+</body>
+</html>

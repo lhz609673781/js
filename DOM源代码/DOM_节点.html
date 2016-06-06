@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOM_节点</title>
+</head>
+<body>
+	<div id="mydiv">
+		你吃不吃饼干
+		<p>里利于市场</p>
+		<!--空白节点-->
+		<div>喝醋大海</div>
+		<!--空白节点-->
+		<h2>火柴棒我给</h2>
+		<!--空白节点-->
+	</div>
+
+	<script type="text/javascript">
+		var mydiv=document.getElementById("mydiv");
+		console.log(mydiv.nodeName+mydiv.nodeValue+mydiv.nodeType);//属性标签不是div的子标签
+		//           div             null             1
+		var node=mydiv.childNodes;   //所有的子节点
+		alert(node.length);			//7
+		for(var i=0;i<node.length;i++){
+			console.log("第"+(i+1)+"个节点:"+"    "+"节点名:"+node[i].nodeName+"节点值："+node[i].nodeValue+"节点类型："+node[i].nodeType)    //空白节点也是子节点
+		}
+
+		document.write("<hr/>")
+		//节点的子节点、父节点
+		document.write(mydiv.firstChild.nodeValue);   //你吃不吃饼干  
+		document.write(mydiv.parentNode.nodeName);    //BODY
+		document.write(mydiv.lastChild.nodeValue);	//(空白)
+
+
+		document.write("<hr/>")
+		//取第二个div
+		var div2=document.getElementsByTagName("div")[1];
+		document.write(div2.nodeName+"<br/>")//DIV
+		//取向上的兄弟节点
+		document.write(div2.previousSibling.nodeType+"<br/>") //空白节点
+		//取向下的兄弟节点
+		document.write(div2.nextSibling.nodeType+"<br/>")//空白节点
+	</script>
+</body>
+</html>

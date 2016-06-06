@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>字符类</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//字符类[]代表在字符类里面任意选择一个去进行匹配，只能选择一个
+		var str="agarehsj";
+		var red=/a[b]c/;
+		document.write(red.test(str)+"<br/>");//false
+
+		//排除:在中括号里最开始加^，代表排除
+		var str="agarehsj";
+		var red=/a[^b]a/;
+		document.write(red.test(str)+"<br/>");//true
+
+		//范围： -  注意：必须从小到大，如0~9
+		var str="agarehsj";
+		var red=/a[a-z]e/;
+		document.write(red.test(str)+"<br/>");
+	</script>
+</body>
+</html>
