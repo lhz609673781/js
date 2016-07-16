@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装--兼容ie事件处理程序</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function addHandler(element,type,handler){
+						//  变量名  事件名 函数名
+			if(element.addEventListener){
+				//DOM2级 
+				element.addEventListener(type,handler,false);
+			}else if(element.attachEvent){
+				//IE    IE中的添加事件
+				element.attachEvent("on"+type,handler);
+			}else{
+				//DOM0级   若浏览器既不是ie,且不支持DOM2级事件处理程序
+				element["on"+type]=handler;
+			}
+		}
+		function delHandler(element,type,handler){
+			//删除
+						//  变量名  事件名 函数名
+			if(element.addEventListener){
+				//DOM2级事件处理程序
+				element.removeEventListener(type,handler,false);
+			}else if(element.attachEvent){
+				//IE     IE中的删除事件
+				element.detachEvent("on"+type,handler);
+			}else{
+				//DOM0级   若浏览器既不是ie,且不支持DOM2级事件处理程序
+				element["on"+type]=null;
+			}
+		}
+
+
+		//阻止浏览器默认样式
+		function preventD(event){
+			var e=event?window.event:event;
+			if(e.preventDefault){
+				e.preventDefault();
+			}else{
+				e.returnValue=false;
+			}
+		}
+
+		//阻止浏览器的默认样式
+		function stopP(event){
+			var e=event? window.event: event;
+			if(e.stopPropagation){
+				e.stopPropagation();
+			}else{
+				e.cancelBubble=true;
+			}
+		}
+	</script>
+</body>
+</html>

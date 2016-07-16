@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>雇员薪水的发放--继承</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		Person.prototype={
+			showInfo:function(){
+				alert("name:"+this.name+"   "+"age:"+this.age);
+			}
+		}
+		function emp(name,age,salary){
+			Person.call(this,name,age);
+			this.salary=salary;
+		}
+		emp.prototype=new Person();
+		emp.prototype.constructor=emp;
+		emp.prototype.pay=function(){
+			alert("name:"+this.name+"   "+"age:"+this.age+"    "+"salary:"+this.salary);
+		}
+		var p=new emp("Tom",20,4000);
+		p.showInfo();
+		p.pay();
+	</script>
+</body>
+</html>

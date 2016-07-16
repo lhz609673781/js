@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>readyState和onreadystatechange</title>
+</head>
+<body>
+	<script type="text/javascript">
+		document.onreadystatechange=function(){ //每判断一次就会触发这个事件
+			alert(document.readyState);//判断文档是否加载完成
+		}
+	</script>
+</body>
+</html>

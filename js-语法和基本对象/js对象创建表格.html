@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>js对象创建表格</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Yctable(data){
+			this.data=data;
+		}
+
+		Yctable.prototype={
+			showTable:function(){
+
+				var table=document.createElement("table");
+				table.setAttribute("border","1px");
+				table.setAttribute("width","400px");
+				table.setAttribute("cellpadding","0px");
+				table.setAttribute("cellspacing","0px");
+
+				var str="";
+				str+="<tr><th>name</th><th>age</th></tr>";
+				
+				
+				for(var i=0;i<this.data.length;i++){
+					str+="<tr>";
+					str+="<td>"+this.data[i].name+"</td>"+"<td>"+this.data[i].age+"</td>";
+					str+="</tr>";
+				}
+				
+				table.innerHTML=str;
+				document.body.appendChild(table);
+			},
+			getTotal:function(){//获取所有的行
+				return this.data.length;
+
+			},
+			getColumnCount:function(){//列
+				return Object.keys(this.data[0]).length;
+				//Object.keys 返回一个所有元素为字符串的数组，其元素来自于从给定的对象上面可直接枚举的属性。
+			},
+			getColumnName:function(){//列名
+				return Object.keys(this.data[0]);
+				//直接返回属性名
+			},
+			getValue:function(){//获取每一个表格属性名和属性值
+				var values=[];
+				for(var i=0;i<this.getTotal();i++){
+					for(var keys in this.data[i]){
+						values.push(this.data[i][keys]);
+						//获取属性data[i]   获取属性值data[i][keys]
+					}
+				}
+				return values;
+			}
+		}
+		var data=[{'name':"lhz","age":"20"},{"name":"yx","age":"21"},{"name":"tom","age":"20"}];
+		var Yctable=new Yctable( data );
+		Yctable.showTable();
+		alert(Yctable.getValue());//lhz,20,yx,21,tom,20
+		alert(Yctable.getTotal());//3
+		alert(Yctable.getColumnCount());//2
+		alert(Yctable.getColumnName());//name,age
+		
+
+	</script>
+</body>
+</html>

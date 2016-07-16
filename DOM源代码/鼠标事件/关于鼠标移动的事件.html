@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>关于鼠标移动的事件</title>
+</head>
+<body>
+	<input type="button" value="我的歌声里" id="song">
+	<script type="text/javascript">
+	//当你触发的是一个事件的时候要通过绑定事件监听来实现它
+		var song=document.getElementById("song");
+		song.addEventListener("mousemove",function(){
+			alert("你移动了鼠标");
+		})
+		song.addEventListener("mousedown",function(){
+			alert("你按下了鼠标");
+		})
+		song.addEventListener("mouseup",function(){
+			alert("你松开了鼠标");
+		})
+		song.addEventListener("mouseover",function(){
+			alert("你的鼠标移入了");
+		})
+		song.addEventListener("mouseout",function(){
+			alert("你的鼠标已移出")
+		})
+	</script>
+</body>
+</html>

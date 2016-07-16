@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOM级别__解决domready加载问题</title>
+	<script type="text/javascript">
+		window.setTimeout(function(){
+			document.getElementsByTagName("p")[0].style.color="red";
+		},3000); //此方法有一个问题，当dom树解析时间超过3s则会出错
+
+
+		// 等dom树全部加载完后才会执行，但若在dom树全部加载完之前执行前面的dom节点的样式则会没有反应
+		window.onload=function(){
+			document.getElementsByTagName("p")[0].style.color="red"
+		}
+
+		
+		
+	</script>
+</head>
+<body>
+	<p>我的名字是凌红竹</p>
+</body>
+</html>

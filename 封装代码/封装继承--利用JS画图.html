@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装继承--利用JS画图</title>
+</head>
+<body>
+	<canvas id="mycanvas" width="1500px" height="1500px">画布一定要设置长宽，否则无法绘制</canvas> 
+	<script type="text/javascript">
+	//定义一个点的坐标
+		function point(x,y){
+			this.x=x;
+			this.y=y;
+		}
+		//定义一根线的长度，
+		function line(p1,p2){
+			this.p1=p1;
+			this.p2=p2;
+			//利用勾股定理求出线的长度
+			this.length=Math.sqrt( Math.pow(p1.x-p2.x,2) + Math.pow(p1.y-p2.y,2) );
+		}
+		//用点和线构成形状
+		function Shape(){
+			this.points=[];
+			this.lines=[];
+			this.init();
+		}
+		Shape.prototype={
+			init: function(){
+				//判断context是否被定义
+				if( (typeof this.context)=='undefined'){
+					var canvas=document.getElementById("mycanvas");
+					this.context=canvas.getContext("2d")
+				}
+			},
+			draw:function(){
+				//利用context完成绘制
+				var ctx=this.context;
+				ctx.strokrstyle=this.getColor();//画笔颜色
+				ctx.beginPath();
+				ctx.moveTo(this.points[0].x,this.points[0].y);
+				for(var i=1;i<this.points.length;i++){
+					ctx.lineTo(this.points[i].x,this.points[i].y);
+				}
+				ctx.closePath();
+				ctx.stroke();
+			},
+			//用取随机数的方式求出rgb
+			getColor:function(){
+				var cs=[];
+				for(var i=0;i<3;i++){
+					cs[i]=parseInt(Math.random()*255);
+				}
+				return 'rgb('+cs.join(',')+')';//输出rgb(x,x,x)
+			},
+			getlines:function(){
+				//如果总线数大于0，直接返回
+				if(this.lines.length>=0){
+					return this.lines;
+				};
+				var lines=[];
+				//当点数小于0,返回空的lines
+				if(this.points<=0){
+					return lines;
+				}
+				//循环连接点构成一个一根根线
+				for(var i=0;i<this.points.length;i++){
+					lines[i]=new line(this.points[i],this.points[i+1]?this.points[i+1]:this.points[0])
+				}
+				this.lines=lines;
+				return lines;
+			},
+			getpoints:function(){
+				return points;
+			},
+			//循环lines数组，取出每一条线，再取出线的length值相加
+			getparimeter:function(){
+				var lines=this.getlines();
+				var preme=0;
+				for(var i=0;i<lines.length;i++){
+					preme+=lines[i].length;
+				}
+				return preme;
+			},
+			getArea:function(){
+
+			}
+		}
+
+	
+
+		function Square(a,l){
+			var p2=new point(a.x+l,a.y);
+			var p3=new point(a.x+l,a.y+l);
+			var p4=new point(a.x,a.y+l);
+			this.points=[a,p2,p3,p4];
+		}
+
+		function Triangle(p1,p2,p3){
+			this.points=[p1,p2,p3];
+		}
+		//Triangle.prototype=new Shape();
+		//用prototype实现封装继承
+		(function(){
+			var s=new Shape();
+			Triangle.prototype=s;
+			Square.prototype=s;
+		})();
+		var p1=new point(200,100);
+		var p2=new point(300,200);
+		var p3=new point(100,200);
+
+		var t1=new Triangle(p1,p2,p3);
+		alert(t1.getColor());
+		t1.draw();
+		var t2=new Square(p3,300);
+		t2.draw();
+		alert(t2.getColor());
+		var t3=new Square(p2,100);
+		t3.draw();
+		alert(t3.getColor());
+		var t4=new Square(p3,100);
+		t4.draw();	
+		alert(t4.getColor());
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>键盘事件--字数控制</title>
+</head>
+<body>
+	<div>
+		<p id="myp">当前最火的新闻</p>
+		<textarea id="myt" rows="5px" cols="40px"></textarea>
+	</div>
+	<script type="text/javascript">
+		var myp=document.getElementById("myp");
+		var myt=document.getElementById("myt");
+		myt.onfocus=function(){
+			//onfocus的设置使文本框在获焦的时候可以立马判定出文本内容的输入字数情况
+			var str=myt.value;
+			if(str.length<=140){
+				myp.innerHTML="您还可以输入"+(140-str.length )+"个字";
+			}else{
+				myp.innerHTML="您已经超过字数"+(str.length-140)+"个字";
+			}
+		}
+		myt.onblur=function(){
+			myp.innerHTML="当前最火的新闻";
+		}
+		myt.onkeyup=function(){
+			//实时控制字数
+			var str=myt.value;
+			if(str.length<=140){
+				myp.innerHTML="你还可以输入"+(140-str.length)+"个字";
+			}else{
+				myp.innerHTML="你已经超过"+(str.length-140)+"个字";
+			}
+		}
+	</script>
+</body>
+</html>

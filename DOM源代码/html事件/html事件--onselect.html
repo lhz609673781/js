@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>html事件--onselect</title>
+</head>
+<body>
+	<div id="test">这里是测试文字</div>
+	<input  type="text" value="这里是测试文字" id="inp">
+	<textarea id="txt">这里是测试文字</textarea>
+
+	<script type="text/javascript">
+		var div=document.getElementById("test");
+		var myp=document.getElementById("inp");
+		var txt=document.getElementById("txt");
+		div.onselect=function(){
+			alert("aaa")
+		}
+		myp.onselect=function(){
+			alert("aaa")
+		}
+		txt.onselect=function(){
+			alert("aaa")
+		}
+
+		div.onselectstart=function(){
+			//专门用来阻止你选中的文本
+			//但此方法不兼容火狐  可在标签内加上样式：style="-moz-user-select:none;"即让标签内内容无法选中 
+			return false;
+		}
+	</script>
+</body>
+</html>

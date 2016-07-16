@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>onselect小练习--选择文档弹出复制等</title>
+	<style type="text/css">
+		#mydiv{
+			display: none;
+			position: absolute;
+			left:0;
+			top: 0;
+			background: #fff;
+			color:lime;
+			border:1px solid gray;
+			padding:5px;
+		}
+		#text{
+			width:800px;
+			height:600px;
+			border:none;
+		}
+		.div2{
+			background: #fff;
+			border:1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<textarea id="text" readonly="yes">文字测试</textarea>
+	<div id="mydiv">复制|搜索|翻译|百科|分享|二维码</div>
+	<script type="text/javascript">
+		var text=document.getElementById("text");
+		var mydiv=document.getElementById("mydiv");
+		var x,y=0;//记录鼠标的位置
+		text.onselect=function(){
+			mydiv.style.display="block";
+			mydiv.style.left=x+"px";
+			mydiv.style.top=y+"px";
+		}
+		text.onmouseup=function(event){
+			var e=event?event:window.event;
+			x=e.clientX;
+			y=e.clientY;
+		}
+		document.onmousedown=function(){
+			mydiv.style.display="none";
+		}
+	</script>
+</body>
+</html>

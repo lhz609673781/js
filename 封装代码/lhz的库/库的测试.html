@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>测试</title>
+	<script type="text/javascript" src="lhz.js"></script>
+</head>
+<body>
+	<div id="mydiv"></div>
+	<p id="show">hello world</p>
+
+
+	<div id="div1">
+		<p class="  a  "></p>
+		<p class="b a  "></p>
+		<p class="  a  c"></p>
+		<p class=" x a b "></p>
+		<span class="a"></span>
+	</div>
+
+
+	<span id="show">显示/隐藏</span>
+	<div id="r">xxxxxxxxxxxxxxxx</div>
+
+
+	<p id="a">a</p>
+	<p id="b">bb</p>
+	<p id="c">ccc</p>
+
+
+	<div id="con">
+		<p>
+			<span>abc</span>
+			<span>efg</span>
+		</p>
+	</div>
+	<script type="text/javascript">
+	//模板替换的测试
+		var template='<table border="{border}">'+'<tr><th>Last</th><td>{last}</td></tr>'+'<tr><th>First</th><td>{first}</td></tr>'+'</table>'
+		//将上面对应的模板替换成以下数据
+		var data={
+			"first":"cral",
+			"last":"Hollywood",
+			"border":10			//{border}
+		}
+
+		lhz.$("mydiv").innerHTML=lhz.supplant(template,data);
+
+
+//将json对象通过eval解析，再用一个匿名函数把相对应的键值替换掉
+		var obj=lhz.parseJson('{"name":"tom","age":-20}',function(k,v){
+			if(k=='age'){
+				v=v<0?1:v;
+			}
+			return v;
+		});
+		alert(obj.name+"\t"+obj.age);
+
+		var obj=lhz.parseJson('{"name":"smith","age":-50}',function(k,v){
+			return (k=='age'&&v<0)?1:v;
+		})
+		alert(obj.name+"\t"+obj.age);
+
+
+//关于全局array和string的tojsonstring的测试
+var obj3={"name":"lhz","age":20};
+alert(obj3.toJSONString());
+
+var arr1=new Array();
+arr1[0]={"name":"lhz","age":20}
+arr1[1]={"name":"zz","age":20}
+arr1[2]={"name":"ll","age":20}
+alert(arr1.toJSONString());
+
+
+//增加删除函数测试
+
+function show(){
+	alert("hello");
+}
+lhz.addEvent("show","click",show);
+lhz.removeEvent("show","click",show);
+
+
+//获取类名的测试
+var r=lhz.getElementsByClassName("a","*","div1");
+alert(r.length);//5
+
+
+//开关属性测试
+var a=function(){
+	lhz.toggleDisplay("r","block");
+}
+var b=function(){
+	lhz.toggleDisplay("r","block")
+}
+lhz.addEvent("show","mouseover",a);
+//lhz.addEvent("show","mouseout",b);
+
+//insertAfter操作测试
+var newnode=document.createElement("p");
+var textnode=document.createTextNode("hello");
+newnode.appendChild(textnode);
+lhz.insertAfter(newnode,lhz.$("b"));
+
+//removeChildren测试
+lhz.removeChildren("con");
+
+
+//在父节点插入第一个子节点测试
+lhz.prependChild("con",newnode);
+</script>
+</body>
+</html>

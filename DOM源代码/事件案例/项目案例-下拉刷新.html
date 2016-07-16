@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>下拉刷新</title>
+	<style type="text/css">
+		*{
+			padding:0px;
+			margin:0px auto;
+		}
+		#mcincontent{
+			width:200px;
+			height:300px;
+			border:1px solid #ccc;
+			margin-top: 20px;
+			overflow: scroll;
+		}
+		/*#mycontent{
+			width:100%;
+			height:100%;
+		}*/
+		li{
+			list-style: none;
+			text-align: center;
+		}
+		#showcontent{
+			width:100%;
+			height:20%;
+			background: #3cf;
+		}
+	</style>
+</head>
+<body>
+	<div id="mcincontent">
+		<div id="mycontent">
+			<ul>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				<li>我叫凌红竹</li>
+				
+			</ul>
+		</div>
+		<div id="showcontent" style="display:none" >
+			<p>加载中，请稍后。。。。。。</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var obj=document.getElementById("mcincontent");
+		obj.onscroll=function(){
+		var scrollH=obj.scrollHeight;
+		//整个内容的高度，包括内容区域的高度，加上被卷起来的部分
+		var scrollT=obj.scrollTop;
+		//即滚到哪里来了，滚动到最后是被卷起来的高度
+		var clientH=obj.clientHeight;
+		//内容区域的高度
+
+
+			if(scrollH=scrollT+clientH){
+				//已经到了底部
+				var sh=document.getElementById("showcontent");
+				sh.style.display="block";
+				window.setTimeout("frush()",1000);
+			}
+		}
+
+		//加载新的下拉列表
+		function frush(){
+			var newdiv=document.createElement("div");
+			var newul=document.createElement("ul");
+			//循环添加内容
+			for(var i=0;i<20;i++){
+				var newli=document.createElement("li");
+				newli.innerHTML="就是凌红竹";
+				newul.appendChild(newli);
+			}
+			newdiv.appendChild(newul);
+			var sh=document.getElementById("showcontent");
+			obj.insertBefore(newdiv,sh);//在sh这个div之前插入
+		}
+	</script>
+</body>
+</html>

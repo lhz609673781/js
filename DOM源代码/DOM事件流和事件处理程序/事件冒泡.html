@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>事件冒泡</title>
+</head>
+<body>
+	<div id="oDiv">
+		<p id="op">
+			<span id="ospan">请点击我</span>
+		</p>
+	</div>
+	<script type="text/javascript">
+		var odiv=document.getElementById("oDiv");
+		var op=document.getElementById("op");
+		var ospan=document.getElementById("ospan");
+		//将逐级向上传播较为不具体的节点
+		odiv.onclick=function(){
+			alert("div标签被点击");
+		}
+		op.onclick=function(){
+			alert("p标签被点击");
+		}
+		ospan.onclick=function(){
+			alert("span标签被点击");
+		}
+	</script>
+</body>
+</html>

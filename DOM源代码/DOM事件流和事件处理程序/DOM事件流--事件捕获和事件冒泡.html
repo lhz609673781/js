@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM事件流--事件捕获和事件冒泡</title>
+</head>
+<body>
+	<div id="oDiv">
+		<p id="op">
+			<span id="ospan">请点击我</span>
+		</p>
+	</div>
+	<script type="text/javascript">
+		var odiv=document.getElementById("oDiv");
+		var op=document.getElementById("op");
+		var ospan=document.getElementById("ospan");
+		
+		//DOM事件流:先捕获后冒泡
+		odiv.addEventListener("click",function(){
+			console.log("div被点击，事件捕获");
+		},true);//在事件捕获阶段被捕获
+		op.addEventListener("click",function(){
+			console.log("p被点击，事件捕获");
+		},true);
+		ospan.addEventListener("click",function(){
+			console.log("ospan被点击，事件捕获");
+		},true);
+
+		odiv.addEventListener("click",function(){
+			console.log("div被点击，事件冒泡");
+		},false);//在事件冒泡阶段被捕获
+		op.addEventListener("click",function(){
+			console.log("p被点击，事件冒泡");
+		},false);
+		ospan.addEventListener("click",function(){
+			console.log("ospan被点击，事件冒泡");
+		},false);
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>键盘事件--keyCode</title>
+</head>
+<body>
+	<input type="text" value="keydown:" id="input1">
+	<input type="text" value="keypress:" id="input2">
+	<script type="text/javascript">
+		var ip1=document.getElementById("input1");
+		var ip2=document.getElementById("input2");
+		ip1.onkeydown=function(event){
+			var e=event?event:window.event;
+			var keyCode=e.keyCode;
+			var text=String.fromCharCode(keyCode)
+			//console.log("keydown:"+text);
+			console.log("keydown:"+keyCode);
+			console.log("keydown:"+text);
+		}
+		ip2.onkeypress=function(event){
+			//keypress对shift键和ctrl键不起作用
+			var e=event?event:window.event;
+			if(e.keyCode){
+				var keyCode=e.keyCode;
+				var text=String.fromCharCode(keyCode);//吧一个unicode编码值装换成字符值
+			}else{
+				//火狐浏览器不支持e.keycode
+				var keyCode=e.which;//取键值
+				var text=String.fromCharCode(keyCode);
+			}
+			//console.log("keypress:"+keyCode);
+			console.log("keypress:"+text);
+		}
+
+	</script>
+</body>
+</html>

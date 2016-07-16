@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>object和array的扩展</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//object,array-->js中的原生对象
+			Object.prototype.toJSONString=function(){
+			var jsonstr=[];
+
+			for(var i in this){
+				if(this.hasOwnProperty(i)){//是否有这个属性
+					//           \"是双引号的json格式
+					jsonstr.push="\""+i+"\":\""+this[i]+"\"";//用JSONString调用键和值是可以的，但会存在内存溢出，太多的递归的问题
+				}
+			}
+			var r=jsonarr.join(",\n");//添加逗号和换行
+			r="{"+r+"}";
+			return r;
+		}
+
+		Array.prototype.toJSONString=function(){
+			var json=[];
+			for(var i=0;i<this.length;i++){
+				json[i]=(this[i]!=null) ? this[i].toJSONString():"null";
+				return "["+json.join(",")+"]"
+			}
+		}
+	</script>
+</body>
+</html>

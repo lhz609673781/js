@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义鼠标右键弹出框</title>
+	<style type="text/css">
+		#mydiv{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<p id="myp">点我，弹出自定义右键菜单</p>
+	<div id="mydiv">
+		<li>vdavsdv</li>
+		<li>vdbhbh</li>
+		<li>dsvdv</li>
+	</div>
+	<script type="text/javascript">
+		var myp=document.getElementById("myp");
+		var mydiv=document.getElementById("mydiv");
+		myp.onmousedown=function(event){ 
+			var event=event?event:window.event;//兼容ie浏览器
+			if(event.button==2){
+				document.oncontextmenu=function(aevent){ //阻止右键默认行为
+					if(window.event){
+						aevent=window.event;
+						aevent.returnValue=false;   //ie阻止事件的默认行为
+						aevent.preventDefault();//针对于高版本的浏览器
+					}else{
+						aevent.preventDefault();//现代浏览器阻止事件的默认行为
+					}
+				};
+				mydiv.style.cssText="display:block;position:absolute;top:"+(event.clientY+5)+"px;left:"+(event.clientX)+"px;";//当点击右键时，mydiv的样式
+			}
+		}
+		mydiv.onmouseout=function(){
+			window.setTimeout(function(){mydiv.style.cssText="display:none;"},400)
+			//需要设置延迟来使鼠标进入mydiv中的选项
+		}
+		
+	</script>
+</body>
+</html>

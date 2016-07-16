@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>onchange</title>
+</head>
+<body>
+	<input type="text" id="inp">
+	<select id="sel">
+		<option>湖南</option>
+		<option>安徽</option>
+	</select>
+	<script type="text/javascript">
+		var inp=document.getElementById("inp");
+		inp.onchange=function(){
+			//onchange并不是实时监听你是否改变，而是当input失焦的时候监听
+			alert("vg")
+		}
+		var  sel=document.getElementById("sel");
+		sel.onchange=function(){
+			var index=this.selectedIndex;//获取到索引号
+			console.log(index);
+			//获取到下拉列表的值
+			console.log(this.options[index].value);
+			console.log(this.options[index].text);
+		} 
+	</script>
+</body>
+</html>

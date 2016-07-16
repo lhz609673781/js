@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>onchang--年月日级联</title>
+</head>
+<body>
+	选择日期：
+	<select id="year" onchange="setDay(this,month,day)">
+		<option value="">年</option>
+	</select>
+	<select id="month" onchange="setDay(year,this,day)">
+		<option value="">月</option>
+	</select>
+	<select id="day">
+		<option value="" >日</option>
+	</select>
+	<script type="text/javascript">
+		var myyear=document.getElementById("year");
+		var mymonth=document.getElementById("month");
+		var myday=document.getElementById("day");
+		//获取当前年份
+		//var str="";
+		for(var i=new Date().getFullYear();i>1990;i--){
+			addoption(myyear,i,i);
+			//第二种方法：str+="<option>"+i+"</option>"
+
+		}
+			//myyear.innerHTML=str;
+		//添加月份
+		for(var i=1;i<13;i++){
+			addoption(mymonth,i,i);
+		}
+
+		//添加日期
+		for(var i=1;i<32;i++){
+			addoption(myday,i,i)
+		}
+		//设置天
+		function setDay(year,month,day){
+			var monthdays=[31,28,31,30,31,30,31,31,30,31,30,31];
+			var y=year.options[year.selectedIndex].text;
+			var m=month.options[month.selectedIndex].text;
+
+			var DayNum=monthdays[m-1];
+			//判断是否是闰年
+			if(m==2 && isLeapYear(y)){
+				DayNum++;//闰年2月为29天
+			}
+			//删除多余的天数
+			for(var i=day.options.length-1;i>=DayNum;i--){
+				day.remove(i);
+			}
+			//解决先选择2月再选择3月出现28天的bug
+			for(var i=day.options.length;i<=DayNum;i++){
+					//如果此处减一得话，将会重复最后一个数字
+				addoption(day,i,i);
+			}
+		}
+		//判断是否为闰年
+		function isLeapYear(year){
+			return (year%4==0 && year%100!=0 ) || (year%400==0);
+		}
+		//将年月日各个节点封装起来
+		function addoption(obj,value,text){
+			var option=document.createElement("option");
+			option.value=value;//option中一定要有value属性
+			option.text=text;
+			//obj.options:获取到obj下面所有的option节点
+			obj.options.add(option);
+
+		}
+	</script>
+</body>
+</html>      

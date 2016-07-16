@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>案例--擦拭</title>
+	<style type="text/css">
+		#wrap{
+			width: 500px;
+			height:500px;
+			border:1px solid #000;
+			background-image: url(img/1.jpg);
+			background-size: 500px 500px;
+			position:relative;
+		}
+		#wrap div{
+			width:50px;
+			height:50px;
+			background-image: url(img/2.jpg);
+			background-size: 50px 50px;
+			position:absolute;
+			transition: 4s;/*动画过渡时间*/
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap"></div>
+	<script type="text/javascript">
+		var wrap=document.getElementById("wrap");
+		var l=0;   //left
+		var t=0;   //top
+		var str="";  //采用字符串拼接的形式插入div
+		for(var i=0;i<100;i++){
+			//俩者不能以相同的方法取值，否则只会构成一条对角线
+			l=Math.floor(i/10)*50;//取出当前方块距左的距离
+			t=(i%10)*50;//取出当前方块距右的距离
+			str+="<div style='left:"+l+"px;top:"+t+"px;'></div>"
+		}
+		wrap.innerHTML=str;
+
+		var divs=wrap.getElementsByTagName("div");
+		for(var i=0;i<divs.length;i++){
+			divs[i].onmouseover=function(){
+				this.style.opacity=0;//透明度为0
+				this.style.transform="scale(0)";//指定对象的2D缩放
+			}
+		}
+	</script>
+</body>
+</html>

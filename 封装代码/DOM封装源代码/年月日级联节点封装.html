@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>年月日级联节点封装</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//将年月日各个节点封装起来
+		function addoption(obj,value,text){
+			var option=document.createElement("option");
+			option.value=value;//option中一定要有value属性
+			option.text=text;
+			obj.options.add(option);
+
+		}
+	</script>
+</body>
+</html>

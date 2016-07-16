@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>IE事件对象</title>
+</head>
+<body>
+	<!--stopPropagation和preventDefault-->
+	<div id="oDiv">
+		<p id="op">
+			<span id="ospan">请点击我</span>
+		</p>
+	</div>
+
+	<a href="http://www.baidu.com" id=mya>点击我跳转到百度</a>
+	<script type="text/javascript">
+		var odiv=document.getElementById("oDiv");
+		var op=document.getElementById("op");
+		var ospan=document.getElementById("ospan");
+
+		odiv.onclick=function(){
+			alert("div被点击");
+		}
+		op.onclick=function(){
+			
+			alert("p标签被点击");
+		}
+		ospan.onclick=function(event){
+			alert("span标签被点击")
+			//只对DON事件对象有用，对IE无用
+			//event.stopPropagation();//阻止事件冒泡
+			
+		}
+		var mya=document.getElementById("mya");
+		mya.onclick=function(event){
+			event.preventDefault();//将不再跳转到百度而直接弹出aaa
+			alert("aaa");
+		}
+	</script>
+</body>
+</html>

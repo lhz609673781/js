@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标事件--可拖动的层</title>
+	<style type="text/css">
+		#box{
+			position:absolute;
+			left:300px;
+			top:200px;
+			font-size: 12px;
+			background: pink;
+			padding:5px;
+			box-shadow:2px 2px 4px black;
+			-moz-box-shadow:2px 2px 4px black;
+			-webkit-box-shadow:2px 2px 4px black;
+			-ms-box-shadow:2px 2px 4px black;
+		}
+		#content{
+			border:1px solid #A5B5D6;
+		}
+		#top{
+			width:425px;
+			line-height:30px;
+			cursor:move;
+			background: #BDCEEF;
+			border-bottom:1px solid #A5B5D6;
+			padding-left: 5px;
+		}
+		#close{
+			color:red;
+			font-size:25px;
+			font-weight: blod;
+			float:right;
+			position:absolute;
+			top:4px;
+			right:9px;
+			cursor:pointer;
+		}
+		#bottom{
+			width:420px;
+			height:250px;
+			padding:10px 5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="content">
+			<div id="top">
+				可拖拽
+				<span id="close" onclick="aclose()">X</span>
+			</div>
+			<div id="bottom">
+				内容。。。。。
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var obox=document.getElementById("box");
+		var otop=document.getElementById("top");
+		function aclose(){
+			obox.style.cssText="display:none;";
+		}
+		startDrag(obox,otop);
+		
+		var params={
+			left:0,
+			top:0,
+			currentX:0,
+			currentY:0,
+			flag:false
+		}
+
+		function getStyle(obj,attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}else{
+				return getComputedStyle(obj,false)[attr];
+			}
+		}
+		
+		function startDrag(obox,otop){
+			params.left=getStyle(obox,"left");
+			params.top=getStyle(otop,"top");
+			//鼠标按下的时候
+			otop.onmousedown=function(event){
+				params.flag=true;
+
+				//此处是为了解决一个BUG，不让鼠标选中文字
+				if(!event){
+					event=window.event;
+					otop.onselectstart=function(){
+						return false;
+					}
+				}
+
+				var e=event?event:window.event;
+				//当鼠标按下的时候记录当前的坐标位置
+				params.currentX=e.clientX;
+				params.currentY=e.clientY;
+			}
+			//当鼠标在文档里移动时
+			document.onmousemove=function(event){
+				var e=event?event:window.event;
+				if(params.flag){//flag一定为true才能移动
+					//记录鼠标移动后的坐标
+					var nowx=e.clientX;
+					var nowy=e.clientY;
+					//计算出移动的距离
+					var disx=nowx-params.currentX;
+					var disy=nowy-params.currentY;
+					//移动后box的位置属性已经改变
+					obox.style.left=parseInt(params.left)+disx+"px";
+					obox.style.top=parseInt(params.top)+disy+"px";
+				}
+			}
+
+			//当鼠标松开后
+			document.onmouseup=function(event){
+				var e=event?event:window.event;
+				//flag的值恢复false
+				params.flag=false;
+				//因为box的位置此时已经改变，params要重新赋值
+				params.left=getStyle(obox,"left");
+				params.top=getStyle(obox,"top");
+			}
+		}
+
+	</script>
+</body>
+</html>

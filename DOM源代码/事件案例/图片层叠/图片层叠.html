@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>图片层叠</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0 auto;
+		}
+		#container{
+			height:477px;
+			margin:0px auto;
+			border:1px solid #ccc;
+			position: relative;
+			overflow: hidden;
+
+		}
+		#container img{
+			border:1px solid #ccc;
+			position:absolute;
+			left:0;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<img src="images/door1.png" alt="图片1" title="图片1">
+		<img src="images/door2.png" alt="图片2" title="图片2">
+		<img src="images/door3.png" alt="图片3" title="图片3">
+		<img src="images/door4.png" alt="图片4" title="图片4">
+		
+	</div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var box=document.getElementById("container");
+			//获取所有的图片
+			var imgs=document.getElementsByTagName("img");
+			//获取当张图片的大小
+			var imgWidth=imgs[0].offsetWidth;//获取某一个元素的当前大小
+			var imgshowWidth=160;//获取被盖住图片漏出来的大小
+			var boxWidth=imgWidth+imgshowWidth*(imgs.length-1);
+			box.style.width=boxWidth+"px";
+
+
+			//设置每个图片的初始位置
+			function setImagePos(){
+				for(var i=1;i<imgs.length;i++){
+					imgs[i].style.left=imgWidth+imgshowWidth*(i-1)+"px";
+				}
+			}
+			setImagePos();
+			//定义每张图片被掩盖的大小
+			var hiddenWidth=imgWidth-imgshowWidth;
+
+			//添加事件
+			for(var i=0;i<imgs.length;i++){
+				(function(i){
+					//绑定事件
+					imgs[i].onmouseover=function(){
+						//将图片初始化，无论如何滑动，图片距左的初始位置不变
+						setImagePos();
+						//控制图片大小
+						for(var j=1;j<=i;j++){
+							//当i=0时不进入此循环，到第二张图片时开始执行此循环
+							imgs[j].style.left=parseInt(imgs[j].style.left)-hiddenWidth+"px";
+							//缩短了一个隐藏图片的长度
+						}
+					}
+				})(i)
+			}
+		}
+	</script>
+</body>
+</html>

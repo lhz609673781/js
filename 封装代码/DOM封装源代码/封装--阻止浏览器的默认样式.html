@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装--阻止浏览器的默认样式</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function delDefault(event){
+			if(window.event){
+				event=window.event;
+				event.returnValue=flase;
+				event.preventDefault();
+			}else{
+				event.preventDefault();
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>练习__利用DOM实现表格</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr=[["张三","19","男"],["李四","20","男"],["凌红竹","20","女"]]
+
+		document.write("<table  border='1px' width='400px' cellpadding='0' cellspacing='0'>");
+		for(var i=0;i<arr.length;i++){
+			var arr1=arr[i];
+			document.write("<tr>");
+			for(var j=0;j<arr1.length;j++){
+				document.write("<td>"+arr1[j]+"</td>");
+			}
+			document.write("<tr>");
+			
+		}
+		document.write("</table>");
+
+		document.write("<hr/>");
+
+
+		//DOM方式
+		//创建表格
+		var arr=[["张三","19","男"],["李四","20","男"],["凌红竹","20","女"]]
+		var table=document.createElement("table");
+		table.setAttribute("border","1px");
+		table.setAttribute("width","400px");
+		table.setAttribute("cellspacing","0");
+		table.setAttribute("cellpadding","0");
+
+		var str="";
+		for(var i=0;i<arr.length;i++){
+			str+="<tr/>";
+			for(var j=0;j<arr[i].length;j++){
+				str+="<td>"+arr[i][j]+"</td>";
+			}
+			str+="</tr>"
+		}
+		table.innerHTML=str;
+		document.body.appendChild(table);
+
+		document.write("<hr/>");
+
+
+		//利用table的属性和方法直接添加
+		var arr=[["张三","19","男"],["李四","20","男"],["凌红竹","20","女"]]
+		var table=document.createElement("table");
+		table.border="1";
+		table.width="400";
+		table.cellSpacing="0";
+		table.cellPadding="0";
+
+		for(var i=0;i<arr.length;i++){
+			table.insertRow(i);
+			for(var j=0;j<arr[i].length;j++){
+				table.rows[i].insertCell(j);
+				table.rows[i].cells[j].appendChild(document.createTextNode(arr[i][j]));
+			}
+		}
+		document.body.appendChild(table);
+	</script>
+</body>
+</html>

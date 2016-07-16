@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>canvas画布的用法</title>
+	<style type="text/css">
+		*{
+			margin:0px auto;
+			padding:0px;
+		}
+		#canvas{
+			margin:0px auto;
+			display:block;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		我在学习画布<!--当浏览器不支持画布功能时出现此句话-->
+	</canvas>
+	<script type="text/javascript">
+		//定义canvas的大小
+		var canvasW=800;
+		var canvasH=canvasW;
+		var flag=false;
+		var canvas=document.getElementById("canvas");
+		var context=canvas.getContext("2d");//获取画布的上下文
+		//将以上定义的画布大小赋值给画布
+		canvas.width=canvasW;
+		canvas.height=canvasH;
+
+		draw();
+		function draw(){
+			context.save();//画布的所有绘制内容只在第一句和最后一句中间有效
+			context.strokeStyle="rgb(230,10,10)";//定义画笔的颜色
+			context.beginPath();//开始绘制路径
+			context.moveTo(0,0);//从居中的第一个点开始
+			context.lineTo(canvasW,0);
+			context.lineTo(canvasW,canvasH);
+			context.lineTo(0,canvasH);
+			context.closePath();//结束绘制路径
+			context.lineWidth=6;//定义画笔粗细
+			context.stroke();//显示到画布里面
+
+			
+			context.strokeStyle="rgb(230,10,10)";
+			context.beginPath();
+			context.moveTo(0,0);
+			context.lineTo(canvasW,canvasH);
+			context.closePath();
+			context.lineWidth=2;
+			context.stroke();
+
+			context.strokeStyle="rgb(230,10,10)";
+			context.beginPath();
+			context.lineTo(canvasW,0);
+			context.lineTo(0,canvasH);
+			context.closePath();
+			context.lineWidth=2;
+			context.stroke();
+			
+
+			context.strokeStyle="rgb(230,10,10)";
+			context.beginPath();
+			context.lineTo(0,canvasH/2);
+			context.lineTo(canvasW,canvasH/2);
+			context.closePath();
+			context.lineWidth=2;
+			context.stroke();
+			
+
+			context.strokeStyle="rgb(230,10,10)";
+			context.beginPath();
+			context.lineTo(canvasW/2,0);
+			context.lineTo(canvasW/2,canvasH);
+			context.closePath();
+			context.lineWidth=2;
+			context.stroke();
+
+
+			context.restore();
+		}
+
+
+		//用户开始绘制
+		canvas.onmousedown=function(e){
+			delDefault(e);
+			flag=true;
+			lasLoc=windowToCanvas(e.clientX,e.clientY)
+		}
+		canvas.onmouseup=function(e){
+			delDefault(e);
+			flag=false;
+		}
+		canvas.onmouseout=function(e){
+			delDefault(e);
+			flag=false;
+		}
+		canvas.onmousemove=function(e){
+			delDefault(e);
+			if(flag){
+				var curLoc=windowToCanvas(e.clientX,e.clientY);
+				context.beginPath();
+				context.moveTo(lasLoc.x,lasLoc.y);
+				context.lineTo(curLoc.x,curLoc.y);
+				context.strokeStyle="rgb(148,105,31)";
+				context.lineWidth=20;
+				context.lineCap="round";
+				context.lineJoin="round";
+				context.closePath();
+				context.stroke();
+				lasLoc=curLoc;
+			}
+		}
+		
+		function delDefault(event){
+			if(window.event){
+				event=window.event;
+				event.returnValue=flase;
+				event.preventDefault();
+			}else{
+				event.preventDefault();
+			}
+		}
+
+		function windowToCanvas(x,y){
+			var box=canvas.getBoundingClientRect();
+			return{x:Math.floor(x-box.left),y:Math.floor(y-box.top)};
+		}
+	</script>
+</body>
+</html>

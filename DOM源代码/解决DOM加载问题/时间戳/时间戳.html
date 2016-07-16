@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>时间戳</title>
+	<script type="text/javascript" src="domready.js"></script>
+</head>
+<body>
+	<div id="header"></div>
+	<div>
+		<img src="images/1106018.jpg" alt="椅子">
+		<img src="images/1245063.jpg" alt="尼坤">
+		<img src="images/1245168.jpg" alt="植物">
+	</div>
+	<script type="text/javascript">
+		var header=document.getElementById("header");
+		var time1="";
+		var time2="";
+		myReady(function(){
+			header.innerHTML+="DOM已经加载<br/>";
+			time1=new Date().getTime();
+			header.innerHTML+="时间戳"+time1+"<br/>";
+		});
+		window.onload=function(){
+			header.innerHTML+="onload已经加载<br/>";
+			time2=new Date().getTime();
+			header.innerHTML+="时间戳"+time2+"<br/>";
+			header.innerHTML+="domready比onload快"+(time1-time2)+"ms<br/>"
+		}
+	</script>
+</body>
+</html>

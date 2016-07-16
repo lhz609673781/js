@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>打字练习</title>
+	<style type="text/css">
+		.style1{
+			color: green;
+
+		}
+		.style2{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	打字练习:<h2 id="test"></h2>
+	<p>键入内容：
+		<input type="text" name="txt" size="50" id="inp">
+	</p>
+	<script type="text/javascript">
+		var str="welcome to study center";
+		window.onload=function(){
+			var htmlstr="";
+			for(var i=0;i<str.length;i++){
+							//<span id="myspan i">截取str中的每一个字符</span>
+				htmlstr+="<span id='myspan"+i+"'>"+str.substring(i,i+1)+"</span>";
+			}
+			//将htmlstr插入到h2标签中
+			document.getElementById("test").innerHTML=htmlstr;
+		}
+
+		var j=0;
+		var inp=document.getElementById("inp");
+		inp.onkeydown=function(event){
+			var e=event? event: window.event;
+			var keycode=e.keyCode;
+			//产生一个字符   大写字母和小写字母隔了32个长度
+			var realchar=String.fromCharCode(keycode+32);
+			//a-z键        删除键       空格
+			if((keycode>=65 && keycode<=90) || keycode==8 || keycode==32){
+				//当str中的字母等于按下的键
+				if(str.substring(j,j+1)==realchar){
+					document.getElementById("myspan"+j).className="style1";
+				}else if(keycode==8){
+					j--;
+					if(j<0){
+						j=0;
+					}//空格时样式为空
+					document.getElementById("myspan"+j).className="";
+					return;
+				}else{
+					document.getElementById("myspan"+j).className="style2";
+				}
+				j++;
+			}
+		}
+	</script>
+</body>
+</html>

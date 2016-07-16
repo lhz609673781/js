@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>作业-鼠标鱼</title>
+	<style type="text/css">
+		*{
+			padding:0px;
+			margin:0px auto;
+		}
+		#mydiv{
+			width:1500px;
+		    height:490px;
+		}
+		#fish{ 
+				position:absolute; 
+			    top:0px; 
+			    left:0px;
+			}
+	</style>
+</head>
+<body>
+	<div id="mydiv">
+		<img src="fish.gif"  id="fish">
+	</div>
+	
+	<script type="text/javascript">
+		var mydiv=document.getElementById("mydiv");
+		var myfish=document.getElementById("fish")
+		mydiv.onmousemove=function(event){
+			myfish.style.cssText="position:absolute;top:"+(event.clientY-50)+"px;left:"+(event.clientX-50)+"px;"
+		}
+		document.onkeydown=function(event){
+			var e=event?event:window.event;
+			var num;
+			switch(e.keyCode){
+				case 37://左键
+					num=parseInt(fish.style.left);
+					 if(num>=10){//控制鱼在屏幕范围内
+						fish.style.left=(num-10)+"px";
+										//(num-10)是控制鱼的移动速度，可调快调慢
+					};
+					break;
+				case 38://上键
+					num=parseInt(fish.style.top);
+					if(num>=10){
+						fish.style.top=(num-10)+"px";
+					};
+					break;
+				case 39://右键
+					num=parseInt(fish.style.left);
+					if(num+10<=document.documentElement.clientWidth-76){
+														//要减去鱼的长度
+						fish.style.left=(num+10)+"px";								
+					};
+					break;
+				case 40://下键
+					num=parseInt(fish.style.top);
+					if(num+10<=document.documentElement.clientHeight){
+						fish.style.top=(num+10)+"px";
+					};
+					break;
+			}
+		}
+	</script>
+</body>
+</html>

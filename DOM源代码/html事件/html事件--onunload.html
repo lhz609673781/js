@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>html事件--onunload</title>
+</head>
+<body>
+	<p>出家人你如果采用乎常人日日计划日uhei</p>
+	<script type="text/javascript">
+	//onunload:当网页关闭之前执行，或在网页刷新时
+		// window.onunload=function(){
+		// 	window.open("http://www.baidu.com");
+		// } //不能用alert,在关闭的时候无法弹出框
+		window.onbeforeunload=function(){
+			return "网页即将关闭";
+		}//暂不支持欧鹏浏览器
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>IE事件处理程序</title>
+</head>
+<body>
+	<!--添加事件：attachEvent      删除事件：detachEvent-->
+	<input type="button" id="btn" value="IE事件处理程序">
+	<script type="text/javascript">
+		var btn=document.getElementById("btn");
+		btn.attachEvent("onclick",show);
+		function show(){
+			alert("IE事件处理程序")
+		}
+
+		//btn.detachEvent("onclick",show);
+	</script>
+</body>
+</html>

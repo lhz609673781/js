@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件处理程序</title>
+</head>
+<body>
+	<!--html事件处理程序:把事件处理程序（function）直接添加在html代码里面,先遇到哪一个事件就触发哪一个事					  件，同一个事件只能触发一次。
+	    DOM0级事件处理程序:把一个函数赋给一个事件，需要在事件名前面加“on”,可以添加多个同样的事件，但是只				   会触发最后一个
+	    DOM2级事件处理程序：addEventListener    removeEventListener   事件名不要添加on了
+	    					可以添加多个同样的事件，并且都可以触发     								-->
+	<input type="button" id="btn1" value="html事件处理程序"  onclick="alert('a')"><!--修改函数比较麻烦-->
+	<input type="button" id="btn2" value="DOM0级事件处理程序">
+	<input type="button" id="btn3" value="DOM2级事件处理程序">
+
+	<script type="text/javascript">
+		var btn2=document.getElementById("btn2");
+		btn2.onclick=function(){
+			alert("DOM0级事件处理程序");
+		}
+		//dom0级如何删除一个事件
+		//btn2.onclick=null;
+
+
+		//DOM2级事件处理程序不兼容iep
+		var btn3=document.getElementById("btn3");
+		btn3.addEventListener("click",showMessage,true);
+		 
+		function showMessage(){
+			alert("DOM2级事件处理程序");
+		}
+		//真正意义上的删除事件
+		//btn3.removeEventListener("click",showMessage,true);
+		</script>
+
+	</body>
+</html>

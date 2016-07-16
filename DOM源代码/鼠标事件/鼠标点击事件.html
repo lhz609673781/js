@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标点击事件</title>
+</head>
+<body>
+<!--直接在标签上绑定事件，必须加on,且不能区分右键-->
+	<input type="button" value="点我" onclick="dian()">
+	<script type="text/javascript">
+	//第一种
+		function dian(){
+			alert("直接在标签上绑定时间");
+		}
+	</script>
+
+
+<!--dblclick-->
+	<input type="button" value="双击">
+	<script type="text/javascript">
+		var btn=document.getElementsByTagName("input")[1];
+		// btn.ondblclick=function(){
+		// 	alert("双击");
+		// }
+
+		// <!--addEventListener-->
+		btn.addEventListener("dblclick",function(){
+			alert("双击")
+		})
+	</script>
+
+
+	<!--单击和双击的集合-->
+	<input type="button" value="鼠标点击事件" onclick="aa()" ondblclick="bb()">
+	<script type="text/javascript">
+		var isdb;
+		function aa(){
+			isdb=false;
+			window.setTimeout(cc,500);
+			function cc(){
+				if(isdb!=false){//此函数主要判定当500ms的时候，若点击了第二下，则isbd=true,将跳至bb()函数，若没有点击第二下则是单击事件
+					return;
+				}
+				alert("单击");
+			}
+		}
+
+		function bb(){
+			isdb=true;
+			alert("双击");
+		}
+	</script>
+
+</body>
+</html>

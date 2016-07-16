@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装--加载新的内容</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function frush(){
+			var newdiv=document.createElement("div");
+			var newul=document.createElement("ul");
+			//循环添加内容
+			for(var i=0;i<20;i++){
+				var newli=document.createElement("li");
+				newli.innerHTML="就是凌红竹";
+				newul.appendChild(newli);
+			}
+			newdiv.appendChild(newul);
+			var sh=document.getElementById("showcontent");
+			obj.insertBefore(newdiv,sh);//在sh这个div之前插入
+		}
+	</script>
+</body>
+</html>

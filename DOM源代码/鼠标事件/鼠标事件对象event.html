@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标事件对象event</title>
+</head>
+<body>
+	<input type="button" value="点击事件" onmousedown="show(event)">
+	<script type="text/javascript">
+		function show(event){
+			//解决ie浏览器的兼容问题，在ie中没有event参数，必须为window.event
+			var event=event? event:window.event;
+			//如果存在这个事件参数则为event,如果ie浏览器则为window.event
+			alert(event.button);
+
+
+		}
+	</script>
+</body>
+</html>

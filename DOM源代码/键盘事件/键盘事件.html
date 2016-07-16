@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>键盘事件</title>
+</head>
+<body>
+	<input type="text" id="txt">
+
+	<script type="text/javascript">
+	//keydown和keypress都先触发事件再显示内容
+		var txt=document.getElementById("txt");
+		// txt.onkeydown=function(){
+		// //不管输入那个键盘都会触发
+		// 	//alert("哈哈");
+		// 	alert(txt.value);//先触发事件在输入文字
+		// }
+
+		txt.onkeypress=function(){
+			//对shift和ctrl键不起作用
+			alert(txt.value);
+		}
+
+		txt.onkeyup=function(){
+			alert(txt.value);
+		}//先显示内容再触发事件
+	</script>
+</body>
+</html>

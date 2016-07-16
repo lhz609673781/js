@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOMContentLoaded</title>
+	<script type="text/javascript">
+	//DOMContentLoaded是document对象上的事件，指的是DOM已经加载完毕
+	//因为是一个事件，需要addEventListener将此事件添加一下
+		function DOMContentLoaded(){
+			alert("加载完毕")
+		}							
+
+		//此方法不兼容IE浏览器									// 事件是否在捕获事件冒泡阶段
+		document.addEventListener("DOMContentLoaded",DOMContentLoaded,false)
+									//事件名        //事件促发的回调函数
+	</script>
+</head>
+<body>
+	<p>第九个覅额外比分为</p>
+</body>
+</html>
