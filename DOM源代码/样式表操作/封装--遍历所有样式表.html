@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>封装--遍历所有样式表</title>
+	<link rel="stylesheet" type="text/css" href="a.css">
+	<style type="text/css">
+		@import "a.css";
+		.myClass2{color:red}
+	</style>
+	<script type="text/javascript">
+		function getSheets(){
+			var styleCollection=[];//样式表集合
+			var indexedStylesheets=0;//作为样式表的索引号
+			//先加 <link><style>所标识的样式表
+			for(var i=0;i<document.styleSheets.length;i++){
+				//styleCollection[0]=document.styleSheet[0]
+				styleCollection[styleCollection.length]=document.styleSheets[i];
+			}
+			//循环   styleCollection中的每个样式，取出import部分
+			//当索引号indexedStylesheets<styleCollection.length时，循环将会一直进行
+			while(indexedStylesheets<styleCollection.length){//递归出每一条import下是否再带有import包含的样式表
+				for(var i=indexedStylesheets;i<styleCollection.length;i++){
+					indexedStylesheets+=1;//每循环一次索引号加一
+					if(styleCollection[i].cssRules){
+						//alert(styleCollection[i].cssRules.length);
+						//w3c   现代浏览器（cssrule）
+						for(var x=0;x<styleCollection[i].cssRules.length;x++){
+							if(styleCollection[i].cssRules[x].type==3){
+								//当type==3时输出此样式表下的import规则的样式表
+								styleCollection[styleCollection.length]=styleCollection[i].cssRules[x].stylesheet;
+							}
+						}
+					}else{
+						//ie
+						for(var x=0;x<styleCollection[x].imports.length;x++){
+							styleCollection[styleCollection.length]=styleCollection[i].imports[x];
+						}
+					}
+				}
+			}
+			return styleCollection;
+		}
+		
+		function show(){
+			var stylesheetlist=getSheets();
+			var resultContext="";
+			for(var i=0;i<stylesheetlist.length;i++){
+				resultContext+="<p> stylesheet href地址："+stylesheetlist[i].href+"</p>";
+			}
+			document.body.innerHTML=resultContext;
+		}
+	</script>
+</head>
+<body onload="show()">
+	
+</body>
+</html>

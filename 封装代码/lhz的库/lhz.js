@@ -10,7 +10,7 @@
    /*window.lhz.prototype={
 	   $:function(){
 	   }
-   }*/
+   }*/ 
     //  <div id="a">  <div id="b">
 	//$("dddd");  var array=$({"a","b"})  
 ////////////////////////////////////////////获取页面元素/////////////////////////////////////////////
@@ -39,11 +39,8 @@
 	//判断当期那浏览器是否兼容这个库：  浏览器能力检测
 	//判断当前浏览器是否兼容这个库
 			function iscompatible(other){
-				//表示是否支持false这个关键字,内容和类型全部相同
-				if(other===false || !Array.prototype.push || !Object.hasownProperty ||
-									/*array是否支持push*/       /*object是否支持*/
-									 !document.createElement || document.getElementByTagName){
-									/*document是否支持*/
+				//表示是否支持false这个关键字,内容和类型全部相同 /*array是否支持push*/       /*object是否支持*/
+				if(other===false || !Array.prototype.push || !Object.hasOwnProperty ||!document.createElement || !document.getElementsByTagName){
 					return false;
 				}
 				return true;
@@ -56,7 +53,7 @@
 
 //取DOM节点    getElementById()
 //getElementsByTagName();
-//getElementBlhzlassName();   ff可以取，但ie不可以实现
+//getElementByClassName();   ff可以取，但ie不可以实现
 //扩展
 function getElementsByClassName(className,tag,parent){
 	//第三个参数未传时默认为document，tag有很多个不同的时候直接传入*
@@ -195,6 +192,30 @@ lhz.removeEvent("show","click",function(){alert("hello");});//删除时用了另
 
 
 
+/*
+	页面加载事件
+*/
+function addLoadEvent(func){
+	//将现有的window.onload事件处理函数的值存入变量oldOnload
+	var oldOnLoad=window.onload;
+	//如果在这个处理函数上还没有绑定任何函数，就像平时那样把新函数添加给他
+	if(typeof window.onload!='function'){
+		window.onload=func;
+	}else{
+		//如果在这个处理函数上已经绑定了一些函数，则将新函数追加到现有指令的尾部
+		window.onload=function(){
+			oldOnLoad();//如果以前这个页面有函数，则调用以前的函数
+			func();//再调用当前函数
+		}
+	}
+}
+window['lhz']['addLoadEvent']=addLoadEvent;
+
+
+
+
+
+
 //移除事件
 	
 function removeEvent(node,type,listener){
@@ -288,6 +309,333 @@ function prependChild(parent,newChild){
  window['lhz']['prependChild']=prependChild;
 
 
+
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////
+ /////////////////////////////样式表操作第一弹:设置样式规则 ->增强了////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////////////////////////
+ //大小写转换
+ function camelize(s){//word-word 转换为wordWord
+ 	return s.replace(/-(\w)/g,function(strMatch,p1){
+ 		//正则表达式中的函数会传入一个数组，在用匿名函数的方式逐一输出
+ 		//alert(strMatch);///-(\w)/g
+ 		return p1.toUpperCase();//把字母转化为大写的函数
+ 	});
+ }
+ window['lhz']['camelize']=camelize;
+
+
+//wordWord转换为word-word 
+ function uncamelize(s,sep){
+ 	sep=sep || '-';
+ 	return s.replace(/([a-z])([A-Z])/g,function(match,p1,p2){
+ 		//alert(match);///([a-z])([A-Z])/g
+ 		return p1+sep+p2.toLowerCase();
+ 	});
+ }
+ window['lhz']['uncamelize']=uncamelize;
+
+
+
+
+//通过Id修改单个元素的样式   ("backgroundColor":"red")
+ function setStyleById(element,styles){
+ 						//id名或节点   样式
+ 	if(!(element=$(element))){
+ 		return false;
+ 	}
+ 	for(property in styles){
+ 		//循环id中的属性
+ 		if(!styles.hasOwnProperty(property)){
+ 			continue;//再循环下一个属性
+ 		}
+ 		if(element.style.setProperty){
+ 			//DOM2样式规范   setProperty(propertyName,value,priority);
+ 			//setProperty("background-color")     
+ 			//             设置属性    属性名           对应属性名的风格样式     索引号
+ 			element.style.setProperty(uncamelize(property,'-'),styles[property],null);
+ 		}else{
+ 			//IE浏览器
+ 			//备用方法：element.style["backgroundColor"]="red";
+ 			element.style[camelize(property)]=styles[property];
+ 		}
+ 	}
+ }
+ window['lhz']['setStyle']=setStyleById;
+ window['lhz']['setStyleById']=setStyleById;
+
+
+//通过标签名修改多个样式：调用举例：lhz.setStylesByTagName('a',('color':'red'))
+//                         标签名    样式对象  父标签ID号
+ function setStylesByTagName(tagname,styles,parent){
+ 	parent=$(parent) || document;//当parent未传入时默认为document;
+ 	var elements=parent.getElementsByTagName(tagname);
+ 	for(var e=0;e<elements.length;e++){
+ 		setStyleById(elements[e],styles);
+ 		
+ 	}
+ }
+window['lhz']['setStylesByTagName']=setStylesByTagName;
+
+
+
+
+//
+function setStyleByClassName(parent,tag,className,style){
+	//parent默认为document   要传入所有的tag则是*号
+	if(!(parent=$(parent))){
+		return false;
+	}
+	var elements=getElementsByClassName(className,tag,parent);
+	for(var e=0;e<elements.length;e++){
+		setStyleById(elements[e],style);
+	}
+	return true;
+}
+window['lhz']['setStyleByClassName']=setStyleByClassName;
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////样式表操作第二弹：基于className切换样式/////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//取得元素中类名的数组  element:要查找类名的元素,id名
+function getClassNames(element){
+	if(!(element=$(element))){
+		return false;
+	}
+	//用一个空格替换多个空格，再基于空格分隔类名
+	return element.className.replace(/\s+/,' ').split(' ')
+	//调用时将会返回一个数组，类名用，隔开
+}
+window['lhz']['getClassNames']=getClassNames;
+
+
+
+//检查元素中是否存在某个类
+/*
+element:要查找类名的元素
+className:要查找的类名
+*/
+function hasClassName(element,className){
+	if(!(element=$(element))){
+		return false;
+	}
+	var classes=getClassNames(element);//得到所有类名
+	for(var i=0;i<classes.length;i++){
+		//循环所得到的类名
+		if(classes[i]===className){
+			//当类名===className时结束循环
+			return true;
+		}
+	}
+	return false;
+}
+window['lhz']['hasClassName']=hasClassName;
+
+
+/*
+为元素添加类
+element:要添加类名的元素
+此方法可能重复添加相同的类名，需改进
+className:要添加的类名
+*/
+function addClassName(element,className){
+	if(!(element=$(element))){
+		return false;
+	}
+	if(hasClassName(element,className)){
+		return;
+	}
+	//将类名添加到当前className的末尾，如果没有类名，则不包含空格
+	//即id名为element的是否有className
+	var space=element.className?' ':'';
+	//   a b     b
+	element.className+=space+className;
+	return true;
+}
+window['lhz']['addClassName']=addClassName;
+
+
+//从元素中删除类
+function removeClassName(element,className){
+	if(!(element=$(element))){
+		return false;
+	}
+	//先取得所有的类
+	var classes=getClassNames(element);
+	//循环遍历数组删除匹配的项
+	//因为从数组中删除项会使数组变短，所以要反向删除
+	var length=classes.length;
+	var a=0;
+	for(var i=length-1;i>=0;i--){
+		if(classes[i]===className){
+			delete(classes[i]);//delete只将数组中下标为i的元素改为undefined,并没有完全删除
+			a++;
+		}
+	}
+	element.className=classes.join(" ");
+	//判断是否删除成功
+	return (a>0?true:false);
+}
+
+window['lhz']['removeClassName']=removeClassName;
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////样式表操作第三弹:更大范围的改变，切换样式///////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+	通过url取得包含所有样式表的数组
+	url:css表的地址
+*/
+function getStyleSheets(url,media){
+	var sheets=[];
+	for(var i=0;i<document.styleSheets.length;i++){//遍历所有的样式表
+				//当某个样式表的url不存在，即索引号为-1时
+		if(document.styleSheet[i].href){return false;}
+		if(url&&document.styleSheets[i].href.indexOf(url)==-1){
+			continue;
+		}
+		if(media){
+			//规范化media字符串
+			media=media.replace(/,\s*/,',');
+			var sheetMedia;
+			if(document.styleSheets[i].media.mediaText.replace(/,\s*/,',')){;
+				//Safari会添加额外的逗号和空格
+				sheetMedia=sheetMedia.replace(/,\s*$/,'');
+			}else{
+				//ie方法
+				sheetMedia=document.styleSheets[i].media.replace(/,\s*/,',');
+			}
+			//如果media不匹配，则跳过
+			if(media!=sheetMedia){
+				continue;
+			}
+		}
+		sheets.push(document.styleSheets[i]);
+	}
+	return sheets;
+}
+window['lhz']['getStyleSheets']=getStyleSheets;
+
+
+
+//添加新的样式表
+//media:在某个媒体上实现
+function addStyleSheet(url,media){
+	media=media || 'screen';
+	var link=document.createElement("link")
+	link.setAttribute('rel','stylesheet');
+	link.setAttribute('type','text/css');
+	link.setAttribute('href','url');
+	link.setAttribute('media','media');
+	document.getElementsByTagName('head')[0].appendChild(link);
+}
+window['lhz']['addStyleSheet']=addStyleSheet;
+
+    
+//移除样式表
+function removeStyleSheet(url,media){
+	var styles=getStyleSheets(url,media);
+	for(var i=0;i<styles.length;i++){
+		//style[i]表示样式表    .ownerNode表示这个样式表所属的节点
+		var node=styles[i].ownerNode || styles[i].owningElement;
+		//禁用样式表
+		styles[i].disabled=true;
+		//移除节点
+		node.parentNode.removeChild(node);
+	}
+}
+window['lhz']['removeStyleSheet']=removeStyleSheet;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////样式表操作第四弹:样式规则操作////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*添加一条css规则（'.test',{'font-size':'40%','color':'red'}）
+	如果存在多个样式表，可使用url和media
+	selector:选择器   .test
+	styles  :样式
+	index:    索引号
+*/
+function addCSSRule(selector,styles,index,url,media){
+	var declaration='';
+	for(property in styles){
+		if(!styles.hasownProperty(property)){
+			continue;
+		}
+		declaration+=property+":"+styles[property]+";";
+	}
+	var stylesheets=getStyleSheets(url,media);
+	var newIndex;
+	for(var i=0;i<styleSheet.length;i++){
+		if(styleSheet[i].insertRule){
+			newIndex=(index>=0?index:styleSheets[i].addCSSRules.length);
+			styleSheets[i].insertRule(selector+'{'+declaration+'}',newIndex);
+		}else if(styleSheet[i].addRule){
+			newIndex=(index>=0?index:-1);
+			styleSheets[i].addRule(selector,declaration,newIndex);
+		}
+	}
+}
+window['lhz']['addCSSRule']=addCSSRule;
+
+
+/*
+编辑样式规则：lhz.editcssrule('.test',{'font-size':'red'})
+*/
+function editCSSRule(selector,styles,url,media){
+	var styleSheets=getStyleSheets(url,media);
+	for(i=0;i<styleSheets.length;i++){
+		var rules=styleSheet[i].cssRules || styleSheets[i].rules;
+		if(!rule){
+			continue;
+		}
+		selector=selector.toUpperCase();
+		for(var j=0;j<rules.length;j++){
+			if(rules[j].selectorText.toUpperCase()==selector){
+				for(property in styles){
+					if(!styles.hasownProperty(property)){
+						continue;
+					}
+					rules[j].style[Camelize(property)]=styles[property];
+				}
+			}
+		}
+	}
+}
+window['lhz']['editCSSRule']=editCSSRule;
+
+
+
+
+//取得一个元素的计算样式
+function getStyle(element,property){
+	if(!(element=$(element))){
+		return false;
+	}
+	var value=element.style[camelize(property)];
+	if(!value){
+		if(document.defaultView&&document.defaultView.getComputedStyle){
+			var css=document.defaultView.getComputedStyle(element,null);
+			value=css?css.getPropertyValue(property):null;
+		}else if(element.currentStyle){
+			value=element.currentStyle[camelize(property)];
+		}
+	}
+	return value=='auto'?'':value;
+}
+window['lhz']['getStyle']=getStyle;
+window['lhz']['getStyleById']=getStyle;
 })();
 
    

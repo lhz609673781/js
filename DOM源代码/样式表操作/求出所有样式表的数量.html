@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>求出所有样式表的数量</title>
+	<style type="text/css">
+		@import "a.css";
+		@import "b.css";
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		//求出所有样式表的数量
+		var styleSheetcount=0;
+		styleSheetcount+=document.styleSheets.length;
+		//先加上所有的css样式表
+		if(document.styleSheets[0].rules){
+			//ie的做法
+			for(var i=0;i<document.styleSheets.length;i++){
+				styleSheetcount+=document.styleSheets[i].imports.length;
+			}
+		}else{
+			for(var i=0;i<document.styleSheets.length;i++){
+				var cssrules=document.styleSheets[i].cssRules;//document下的每一条css规则
+				for(var j=0;j<cssrules.length;j++){
+					var rule=cssrules[j];//循环每一条规则，
+					if(rule.type==3){
+						styleSheetcount++;
+					}
+				}
+			}
+			alert("样式表的数量："+styleSheetcount);
+		}
+	</script>
+</body>
+</html>

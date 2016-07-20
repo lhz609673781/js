@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>样式表操作测试</title>
+	<script type="text/javascript" src="lhz.js"></script>
+</head>
+<body>
+	<div id="a">hello</div>
+	<div id="b">bye</div>
+	<p id="c">hello
+		<span >bye</span>
+	</p>
+	<span>ncjbibabia</span>
+
+
+	<p id="a_1">aaaaa
+		<span class="a_a">cvdvcv</span>
+		<span>vvvvvvvv</span>
+	</p>
+	<span class="a_a">xxxxxxxx</span>
+
+	<div id="ab" class="f e g">ppppppppp</div>
+	<script type="text/javascript">
+		//大小写转换
+alert(lhz.camelize("font-size"));
+alert(lhz.uncamelize("fontSize"));
+  
+//setstyleById测试
+(function init(){
+	var newstyle={"color":"red","background":"blue"};
+	//lhz.setStyleById("div",newstyle);//第一个参数必须是ID名
+	lhz.setStylesByTagName("div",newstyle)
+	var newstyle2={"color":"blue","background":"red"};
+	//lhz.setStyle("b",newstyle2);
+	lhz.setStylesByTagName("span",newstyle2)//父节点为document会取得当前页面所有的指定标签
+
+//setStyleByClassName
+var newstyle3={"color":"yellow","backgroundColor":"pink"}
+lhz.setStyleByClassName("a_1","span","a_a",newstyle3);
+})();
+
+
+//基于className切换样式测试
+(function some(){
+	alert(lhz.getClassNames("ab"));//f,e,g
+	lhz.addClassName("ab","a");
+	alert(lhz.getClassNames("ab"));//f,e,g,a
+	alert(lhz.hasClassName("ab","a"));//true
+	lhz.removeClassName("ab","g");
+	alert(lhz.getClassNames("ab"));
+	alert(lhz.removeClassName("ab","g"));
+})();
+
+
+//添加样式表操作测试
+
+(function sheet(){
+	lhz.addStyleSheet(a.css);
+})
+	</script>
+
+</body>
+</html>

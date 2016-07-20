@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>禁用样式表disabled</title>
+	<style type="text/css">
+		.myclass2{
+			color:red;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="a.css"> 
+</head>
+<body>
+	<p class="myclass1  myclass2">hello</p>
+
+	<script type="text/javascript">
+		// document.styleSheets[0].disabled=true;//red
+		document.styleSheets[1].disabled=true;//blue
+	</script>
+</body>
+</html >

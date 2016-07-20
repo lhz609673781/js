@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>添加样式表</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function addSheet(cssURL){
+			if(document.createStyleSheet){//ie
+				document.createStyleSheet(cssURL);
+			}else{//w3c
+				var ss=document.createElement("link");
+				//节点属性的创建
+				ss.type="text/css";
+				ss.rel="stylesheet";
+				ss.href=cssURL;
+				document.getElementsByTagName("head")[0].appendChild(ss);
+			}
+		}
+		addSheet("a.css");
+	</script>
+</body>
+</html>

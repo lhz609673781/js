@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>移除样式表</title>
+	<style type="text/css">
+		.myclass2{
+			color:red;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="a.css">
+</head>
+<body>
+	<p class="myclass2">dddddd</p>
+	<script type="text/javascript">
+		function removeSheet(index){
+			//获取所有样式表   再根据索引号获取要移除的样式表
+			var sheet=document.styleSheets[index];
+			//             ie                    w3c
+			//container-><style>
+			var container=sheet.owningElement || sheet.ownerNode;
+			//删除这个样式表
+			if(container){
+				container.parentNode.removeChild(container);
+			}
+		}
+		removeSheet(0);
+	</script>
+</body>
+</html>

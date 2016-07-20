@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>取出import导入的样式表</title>
+	<style type="text/css">
+		@import "a.css";
+
+	</style>
+</head>
+<body onload="show()">
+	<script type="text/javascript">
+		function show(){
+			var importrules;//取出import导入的样式规则,即a.css下的所有规则属性
+			//cssRules是w3c中styleSheets中的一个属性，表示样式表下的样式规则
+			if(document.styleSheets[0].cssRules){//w3c
+				//DOM节点下的第一个样式表的第一个样式规则的样式表的样式规则
+				//w3c不支持imports对象
+				importrules=document.styleSheets[0].cssRules[0].styleSheet.cssRules;
+			}else{//ie
+				importrules=document.styleSheets[0].imports[0].rules;
+			}
+			//alert(document.styleSheets[0].cssRules.length);
+			alert(importrules.length);
+		}
+	</script>
+</body>
+</html>

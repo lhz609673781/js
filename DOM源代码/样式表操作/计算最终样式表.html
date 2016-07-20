@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>计算最终样式表</title>
+	<style type="text/css">
+		.myclass{
+			color:red;
+		}
+		#mydiv{
+			color:blue;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="myclass" id="mydiv">hello</div>
+	<button onclick="alert(compute('mydiv','color'))" value="显示最终样式"></button>
+
+	<script type="text/javascript">
+					// id或node   color==
+		function compute(ele,attr){
+			var eleobj=document.getElementById(ele);
+			var computedStyle;
+			if(eleobj.currentStyle){//ie
+				computedStyle=eleobj.currentStyle;//对eleob所在节点的样式控制
+			}else{//w3c													   伪类
+				computedStyle=document.defaultView.getComputedStyle(eleobj,null);
+
+			}
+			return computedStyle[attr];//返回节点下的某一个样式规则
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>添加删除样式</title>
+
+</head>
+<body>
+	<p class="a">ffgrgesrgesr</p>
+	<script type="text/javascript">
+							//选择器   规则名
+		function addNewRule(selector,ruleText){
+			var cssObj;
+			//添加规则必须创建保证文档中有至少一个样式表，没有就要
+			if(document.styleSheets.length>0){
+				cssObj=document.styleSheets[0];
+			}else{
+				if(document.createStyleSheet){
+					cssObj=document.createStyleSheet();
+				}else{
+					var ss=document.createElement("style");
+					ss.style="text/css";
+					document.getElementsByTagName("head")[0].appendChild(ss);
+					cssObj=document.styleSheets[0];
+				}
+			}
+			//ie
+			if(cssObj.addRule){
+				cssObj.addRule(selector,ruleText);
+			}else{//w3c
+				cssObj.insertRule(selector+'{'+ruleText+'}',0);
+			}
+		}
+
+		function delRule(){
+			var styleObj=document.styleSheets[0];
+			if(styleObj.cssRules){//w3c
+				styleObj.deleteRule(styleObj.cssRules.length-1)
+			}else{//ie
+				styleObj.removeRule(styleObj.rules.length-1)
+			}
+		}
+
+		addNewRule(".a","color:red");
+		delRule();
+	</script>
+</body>
+</html>

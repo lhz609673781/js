@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>查找样式规则</title>
+	<style type="text/css">
+		.myclass{
+			color:red;
+		}
+		<link rel="stylesheet" href="a.css" />
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function getSheets(){
+			var styleCollection=[];//样式表集合
+			var indexedStylesheets=0;//作为样式表的索引号
+			//先加 <link><style>所标识的样式表
+			for(var i=0;i<document.styleSheets.length;i++){
+				//styleCollection[0]=document.styleSheet[0]
+				styleCollection[styleCollection.length]=document.styleSheets[i];
+			}
+			//循环   styleCollection中的每个样式，取出import部分
+			//当索引号indexedStylesheets<styleCollection.length时，循环将会一直进行
+			while(indexedStylesheets<styleCollection.length){//递归出每一条import下是否再带有import包含的样式表
+				for(var i=indexedStylesheets;i<styleCollection.length;i++){
+					indexedStylesheets+=1;//每循环一次索引号加一
+					if(styleCollection[i].cssRules){
+						//alert(styleCollection[i].cssRules.length);
+						//w3c   现代浏览器（cssrule）
+						for(var x=0;x<styleCollection[i].cssRules.length;x++){
+							if(styleCollection[i].cssRules[x].type==3){
+								//当type==3时输出此样式表下的import规则的样式表
+								styleCollection[styleCollection.length]=styleCollection[i].cssRules[x].stylesheet;
+							}
+						}
+					}else{
+						//ie
+						for(var x=0;x<styleCollection[x].imports.length;x++){
+							styleCollection[styleCollection.length]=styleCollection[i].imports[x];
+						}
+					}
+				}
+			}
+			return styleCollection;
+		}
+		/*searchString:要查的选择器名
+		exact:true精确查找   false:模糊查找*/
+		function searchRule(searchString,exact){
+			var stylesheetlist=getSheets();//获取所有的样式表
+			var rulelist=[];//匹配规则
+			for(var i=0;i<stylesheetlist.length;i++){//循环样式
+				var ruleSet=stylesheetlist[i].rules || stylesheetlist[i].cssRules ;
+				for(var x=0;x<ruleSet.length;x++){
+					//如果是精确查找，则取出每个rule的selectorText选择器名
+					if(exact&& ruleSet[x].selectorText==searchString){
+						rulelist.push(ruleSet[x]);
+						//模糊查找
+					}else if(!exact&&(ruleSet[x].selectorText.indexOf(searchString)>-1)){
+						//当exact为false，只需查找要查找的选择器是否存在，再进行添加
+						rulelist.push(ruleSet[x]);
+					}
+				}
+			}
+			return rulelist;
+			//alert(rulelist);[object CSSStyleRule]
+		}
+		alert(searchRule("myclass",false));
+	</script>
+</body>
+</html>
