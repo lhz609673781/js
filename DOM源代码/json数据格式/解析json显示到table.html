@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>解析json显示到table</title>
+</head>
+<body>
+	<div id="pro">
+		<table id="protable" width="800">
+			<thead>
+				<tr>
+					<td>编号</td>
+					<td>商品名</td>
+					<td>价格</td>
+					<td>图像</td>
+				</tr>
+			</thead>
+			<tbody id="probody">
+				
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		var result="{\"page\":1,\"rows\":10,\"commodity\":[{\"pid\":1,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":2,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":3,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":4,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":5,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":6,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":7,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":8,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":9,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"},{\"pid\":10,\"pname\":\"苹果\",\"price\":20,\"img\":\"1.jpg\"}]}";
+		var robject=eval("("+ result +")");//设置一个eval(string);  必须加“（”否则会报错
+		var str="";
+		for(var i=0;i<robject.commodity.length;i++){
+			str+="<tr>";
+			var c=robject.commodity[i];
+			str+="<td>"+c.pid+"</td><td>"+c.pname+"</td><td>"+c.price+"</td><td>"+c.img+"</td>";
+			str+="</tr>";
+		}
+		document.getElementById("probody").innerHTML=str;
+	</script>
+</body>
+</html>
