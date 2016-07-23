@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>样式表操作测试</title>
+	<link rel="stylesheet" type="text/css" href="a.css" media="screen">
 	<script type="text/javascript" src="lhz.js"></script>
 </head>
 <body>
@@ -21,6 +22,9 @@
 	<span class="a_a">xxxxxxxx</span>
 
 	<div id="ab" class="f e g">ppppppppp</div>
+
+
+	<p class="ccc">凌红竹</p>
 	<script type="text/javascript">
 		//大小写转换
 alert(lhz.camelize("font-size"));
@@ -49,15 +53,19 @@ lhz.setStyleByClassName("a_1","span","a_a",newstyle3);
 	alert(lhz.hasClassName("ab","a"));//true
 	lhz.removeClassName("ab","g");
 	alert(lhz.getClassNames("ab"));
-	alert(lhz.removeClassName("ab","g"));
+
 })();
 
 
 //添加样式表操作测试
 
+
+
 (function sheet(){
-	lhz.addStyleSheet(a.css);
-})
+	//lhz.getStyleSheets("a.css","screen")
+	//lhz.addStyleSheet("a.css");
+	lhz.removeStyleSheet("a.css")
+})();
 	</script>
 
 </body>

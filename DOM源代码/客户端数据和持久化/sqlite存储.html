@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sqlite存储</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var db;
+	//创建数据库 test
+		if(window.openDatabase){//这个方法使用现有数据库或创建新数据库创建数据库对象。
+		//("数据库名"，"版本号，默认为1.0"，"对数据库的描述"，"数据库大小"，"回调函数(可省略)")			
+		    db=openDatabase("test",1.0,"testdb",10000)	;
+			db.transaction(function(transaction){
+				//创建表
+				transaction.executeSql("create table student(sid int auto_increment primary key,sname text,age int,sex text,address text)",[]);
+			})	;
+				//插入数据
+				db.transaction(function(transaction){
+					//transaction 事务
+					transaction.executeSql("insert into student(sid,sname,age,sex,address) values(0,'zs',20,'男','湖南')",[]);
+				})
+
+				//更新
+			db.transaction(function(transaction){
+				//transaction 事务
+				transaction.executeSql("update student set sname='lhz' where sname='zs' ", []);
+			});
+			//删除表的操作
+			db.transaction(function(transaction){
+				transaction.executeSql("delete from student",[]);
+			})
+		}
+	</script>
+</body>
+</html>

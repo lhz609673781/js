@@ -201,6 +201,7 @@ function addLoadEvent(func){
 	//如果在这个处理函数上还没有绑定任何函数，就像平时那样把新函数添加给他
 	if(typeof window.onload!='function'){
 		window.onload=func;
+		func();//函数一定要再调用激活一次；
 	}else{
 		//如果在这个处理函数上已经绑定了一些函数，则将新函数追加到现有指令的尾部
 		window.onload=function(){
@@ -260,7 +261,7 @@ window['lhz']['toggleDisplay']=toggleDisplay;
 function moveElement(elementId,final_x,final_y,interval){
 	//浏览器检测及元素是否存在检测
 	if(!iscompatible()) return false;
-	if(($(elementId))) return false;
+	if(!($(elementId))) return false;
 
 		//第一次移动的时候element是没有绑定timeout的事件的
 	if(element.movement){

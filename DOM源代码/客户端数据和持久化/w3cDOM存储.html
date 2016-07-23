@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>w3cDOM存储</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//sessionStorage只能在当前页面获取
+		alert("首次页面加载："+sessionStorage.hello);//会存储上一次加载时获取的值，但只限当前页面
+		sessionStorage["hello"]="lhz";
+		sessionStorage["hello"]="eorld";
+		alert(sessionStorage.hello);
+
+		alert(sessionStorage.getItem("hello"));//eorld   getItem是所存储的键的值
+
+		alert(sessionStorage.key("hello"));//hello
+
+		alert("localStorage首次页面加载："+localStorage.hello);
+		localStorage['hello']="world";//可以跨多个页面
+		alert(localStorage.hello);
+	</script>
+</body>
+</html>

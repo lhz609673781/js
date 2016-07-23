@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>userdata--测试</title>
+	<script type="text/javascript" src="lhz.js"></script>
+	<script type="text/javascript" src="UserData.js"></script>
+</head>
+<body>
+	
+</body>
+	<script type="text/javascript">
+			window.onload=function(){
+				UserData.set("name","lhz");
+				alert(UserData.get("name"));//lhz
+
+				UserData.del("name");
+				alert(UserData.get("name"));//null
+			}
+		</script>
+</html>
